@@ -91,7 +91,7 @@ h6 {
     margin-top: 0;
     margin-bottom: 15px;
     letter-spacing: .025em;
-    line-height: 1.6;
+    /* line-height: 1.6; */
 }
 
 .form-control {
@@ -647,7 +647,7 @@ h6 {
 }
 
 .section-padding {
-    padding: 80px 0;
+    padding: 0px 0;
 }
 
 section.coupon {
@@ -705,6 +705,7 @@ body {
     font-size: 14px;
     font-weight: 300;
     overflow-x: hidden !important;
+    background-color: #44d62c;
 }
 
 h1 {
@@ -3768,10 +3769,10 @@ ul.list-inline li {
     line-height: 65px;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 0 8px rgba(166, 167, 163, 0.24);
+    box-shadow: 0 0 0 8px #44d62c;
     font-size: 35px;
     font-weight: 600;
-    color: #404040;
+    color: #44d62c;
     position: absolute;
     top: 110px;
     left: 50%;
@@ -3833,7 +3834,8 @@ ul.list-inline li {
     font-size: 45px;
     position: relative;
     font-weight: 600;
-    color: #666;
+    color: #44d62c;
+    background-color: transparent;
     display: inline-block;
     padding-top: 25px;
 }
@@ -4978,7 +4980,7 @@ ul.icon li::before {
 }
 
 .list-details-section {
-    padding-top: 80px;
+    /* padding-top: 80px; */
 }
 
 .list-details-section:first-child {
@@ -6676,6 +6678,7 @@ input[type="radio"] {
     height: auto;
     border-radius: 50%;
     position: absolute;
+    margin: 80px 0px 0px 55px;
 }
 
 .user-name {
@@ -6721,7 +6724,7 @@ input[type="radio"] {
 
 .user-avatar img {
     border-radius: 50%;
-    width: 120px;
+    width: 160px;
 }
 
 .user-contact li i {

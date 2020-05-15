@@ -53,12 +53,14 @@ function fblogin() {
                 document.getElementById('status').innerHTML = 'Good to see you, ' + response.name + '! User id: ' + response.id;
                 // hide the sign in btn once the user is connected
                 document.getElementById('loginbtn').style.display = "none";
+                
             });
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
     });
 }
+
 
 // Method to sign out of facebook
 // Method that executes the fb log out

@@ -1,18 +1,807 @@
 <!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+</html>
 
 <head>
-<!-- Bootstrap CDNs-->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<!-- React CDNs-->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-</head>
+    <head>
+        <!-- Metas -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="LionCoders" />
+        <!-- Links -->
+        <link rel="icon" type="image/png" href="#" />
+        <!-- google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+        <!-- Plugins CSS -->
+        <link href="/static/css/plugin.css" rel="stylesheet" />
+        <!-- style CSS -->
+        <link href="/static/css/style.css" rel="stylesheet" />
+        <link href="/static/css/dashboard.css" rel="stylesheet" />
+
+
+        <!-- Document Title -->
+        <title>ZDAC - Grants</title>
+    </head>
 
 <body>
-    Grants Page
+
+    <!--Page Wrapper starts-->
+    <div class="page-wrapper fixed-footer">
+        <!--header starts-->
+        <header class="header transparent scroll-hide">
+            <!--Main Menu starts-->
+            <div class="site-navbar-wrap v1" style="background-color: black">
+                <div class="container">
+                    <div class="site-navbar">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 col-6">
+                                <!-- <a class="navbar-brand" href="#">ZDAC<img src="/static/images/logoX.png" alt="logo"
+                                        class="img-fluid">ZDAC</a> -->
+                                <a class="navbar-brand" style="color:#44d62c">ZDAC</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Main Menu ends-->
+        </header>
+        <!--Header ends-->
+
+        
+        
+
+<<!--User Profile starts-->
+<div class="user-profile section-padding mar-top-30 " style="background-color: ";>
+
+    <!--Dashboard content starts-->
+    <div class="dash-content" style="margin-top: 50px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 2">
+                    <div style="background-color: black;"class="recent-activity">
+                        <div class="act-title">
+                            <h5 style="color: white;"><i style="color: white;"class="ion-person"></i>Profile Details</h5>
+                        </div>
+                        <div class="profile-wrap">
+                            <div class="row">
+                                
+                                    <div class="user-avatar">
+                                        <img src="/static/images/user.jpg" alt="">
+                                    </div>
+                                <div class="col-md-10 offset-md-2">
+                                    <div class="my-profile">
+                                        <ul class="db-profile-info">
+                                            <li>
+                                                <h6>First Name :</h6>
+                                                <span>Steve </span>
+                                            </li>
+                                            <li>
+                                                <h6>Last Name :</h6>
+                                                <span> Austin</span>
+                                            </li>
+                                            <li>
+                                                <h6>Email Id :</h6>
+                                                <span> steve_aus@mail.com</span>
+                                            </li>
+                                            <li>
+                                                <h6>Phone :</h6>
+                                                <span> +44 20 7336 8898</span>
+                                            </li>
+                                            <li>
+                                                <h6>Password :</h6>
+                                                <span>123456</span>
+                                            </li>
+                                            <li>
+                                                <h6>NRIC :</h6>
+                                                <span> S1234567Z</span>
+                                                <a href="#" class="btn v3" style="position:relative;font-size: smaller;margin-left: 10px;">Upload NRIC</a>
+                                            </li>
+                                            <li>
+                                                <h6>Address :</h6>
+                                                <span> 864 W. Walnut Ave. Avon, IN 46123 St James Pl, Brooklyn</span>
+                                            </li>
+
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Dashboard content ends-->
+</div>
+<!--User Profile ends-->
+<!--User profile details starts-->
+<div class="list-details-section section-padding mar-top-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="user_info_menu">
+                    <ul class="nav nav-tabs list-details-tab" id="lionTab" role="tablist">
+                        <li class="nav-item active">
+                            <a data-toggle="tab" href="#my-list">My Lists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#my-reviews">Reviews <span class="text-grey"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#followers">Followers <span class="text-grey">(29)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#following">Following<span class="text-grey">(13)</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content mar-top-30" id="lionTabContent">
+                    <div class="tab-pane fade active show" id="my-list">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="similar-item mar-bot-40">
+                                    <img src="images/single-listing/park-hyatt.jpg" alt="...">
+                                    <div class="similar-title-box">
+                                        <h5><a href="#">Park Hyatt</a></h5>
+                                        <p><span class="price-amt">$89</span>/Avg</p>
+                                    </div>
+                                    <div class="customer-review">
+                                        <div class="rating-summary">
+                                            <div class="rating-result" title="60%">
+                                                <ul class="product-rating">
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p><i class="ion-ios-location"></i> 31st North St, Sydney, Australia</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="similar-item mar-bot-40">
+                                    <img src="images/single-listing/hilton.jpg" class="img-fluid" alt="...">
+                                    <div class="similar-title-box">
+                                        <h5><a href="#">Hilton Moorea</a></h5>
+                                        <p><span class="price-amt">$109</span>/Avg</p>
+                                    </div>
+                                    <div class="customer-review">
+                                        <div class="rating-summary">
+                                            <div class="rating-result" title="60%">
+                                                <ul class="product-rating">
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p><i class="ion-ios-location"></i> Hilton Ave, Miami, USA</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="similar-item mar-bot-40">
+                                    <img src="images/single-listing/lagoon-resort.jpg" class="img-fluid" alt="...">
+                                    <div class="similar-title-box">
+                                        <h5><a href="#">Lagoon Resort &amp; Spa</a></h5>
+                                        <p><span class="price-amt">$75</span>/Avg</p>
+                                    </div>
+                                    <div class="customer-review">
+                                        <div class="rating-summary">
+                                            <div class="rating-result" title="60%">
+                                                <ul class="product-rating">
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p><i class="ion-ios-location"></i> 75 Prince St, NY, USA</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="similar-item mar-bot-40">
+                                    <img src="images/single-listing/westin.jpg" class="img-fluid" alt="...">
+                                    <div class="similar-title-box">
+                                        <h5><a href="#">The Westin Excelsior</a></h5>
+                                        <p><span class="price-amt">$89</span>/Avg</p>
+                                    </div>
+                                    <div class="customer-review">
+                                        <div class="rating-summary">
+                                            <div class="rating-result" title="60%">
+                                                <ul class="product-rating">
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                    <li><i class="ion-android-star-half"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p><i class="ion-ios-location"></i>21st Queens park,London UK</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="my-reviews">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-item__post">
+                                    <div class="review-item__post-image">
+                                        <img class="review-item__image" src="images/reviews/burger.jpg" alt="...">
+                                    </div>
+                                    <div class="review-item__post-content">
+                                        <h2 class="review-item__post-title">
+                                            <a href="#">Ronald Burger House</a>
+                                        </h2>
+                                        <div class="list-ratings">
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star-half"></span>
+                                            <a href="#">(31 Reviews)</a>
+                                        </div>
+                                        <p class="review-item__post-location">
+                                            <i class="ion-ios-location"></i>
+                                            Vienna 1010, Thailand
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h3 class="review-item__title">
+                                Yammy Burger in Thailand.
+                            </h3>
+                            <p class="review-item__description">
+                                I love the Burger here but it is so rare that I get to come here. Tasty Burger is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
+
+                            </p>
+                            <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
+                            <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-item__post">
+                                    <div class="review-item__post-image">
+                                        <img class="review-item__image" src="images/reviews/noodles.jpg" alt="...">
+                                    </div>
+                                    <div class="review-item__post-content">
+                                        <h2 class="review-item__post-title">
+                                            <a href="#">Noodles shop</a>
+                                        </h2>
+                                        <div class="list-ratings">
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star-half"></span>
+                                            <a href="#">(31 Reviews)</a>
+                                        </div>
+                                        <p class="review-item__post-location">
+                                            <i class="ion-ios-location"></i>
+                                            23rd Block, NC, USA
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="review-item__title">
+                                Best Noodles in Thailand.
+                            </h3>
+                            <p class="review-item__description">
+                                I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
+                            </p>
+                            <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
+                            <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-item__post">
+                                    <div class="review-item__post-image">
+                                        <img class="review-item__image" src="images/reviews/coffee.jpg" alt="...">
+                                    </div>
+                                    <div class="review-item__post-content">
+                                        <h2 class="review-item__post-title">
+                                            <a href="#">La Vencu Caffe</a>
+                                        </h2>
+                                        <div class="list-ratings">
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star"></span>
+                                            <span class="ion-android-star-half"></span>
+                                            <a href="#">(31 Reviews)</a>
+                                        </div>
+                                        <p class="review-item__post-location">
+                                            <i class="ion-ios-location"></i>
+                                            13th street Ave, London
+                                        </p>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <h3 class="review-item__title">
+                                Best Caffe in London.
+                            </h3>
+                            <p class="review-item__description">
+                                I love the Coffee here but it is so rare that I get to come here. Tasty Coffee is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly.
+
+                            </p>
+                            <a href="#" class="rate-review float-left"><i class="icofont-thumbs-up"></i> Helpful Review <span>2</span></a>
+                            <a href="#" class="rate-review float-right"><i class="icofont-reply"></i>Reply</a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="followers">
+                        <div class="tab-content mar-tb-30" id="lionTabContent-1">
+                            <div class="tab-pane fade active show" id="my-followers">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#">
+                                                <h6>Shon Adams</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#">
+                                                <h6>Lee Priest</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                <h6>Frank Jane</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                <h6>Christine Evans</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="my-following">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                <h6>Frank Jane</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                <h6>Christine Evans</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="following">
+                        <div class="tab-content mar-tb-30" id="lionTabContent-1">
+                            <div class="tab-pane fade active show" id="my-followers">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                <h6>Frank Jane</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                <h6>Christine Evans</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-3.png" class="img-fluid" alt="#">
+                                                <h6>Lee Priest</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-4.png" class="img-fluid" alt="#">
+                                                <h6>Shon Adams</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="my-following">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewer-1.png" class="img-fluid" alt="#">
+                                                <h6>Frank Jane</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sidebar-widget follow">
+                                            <div class="follow-img">
+                                                <img src="images/clients/reviewr-2.png" class="img-fluid" alt="#">
+                                                <h6>Christine Evans</h6>
+                                                <span>New York</span>
+                                            </div>
+                                            <ul class="social-counts">
+                                                <li>
+                                                    <h6>26</h6>
+                                                    <span>Listings</span>
+                                                </li>
+                                                <li>
+                                                    <h6>326</h6>
+                                                    <span>Followers</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Following</span>
+                                                </li>
+                                            </ul>
+                                            <div class="text-center mar-bot-25">
+                                                <a href="#" class="btn v3"><i class="icofont-eye-alt"></i> Follow</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="listing-sidebar">
+                    <div class="boxed-widget">
+                        <h3><i class="icofont-contact-add"></i>Contact</h3>
+
+                        <div class="address">
+                            <span class="ion-ios-location"></span>
+                            <p> 864 W. Walnut Ave. Avon, IN 46123 St James Pl,
+                                Brooklyn</p>
+                        </div>
+                        <div class="address">
+                            <span class="ion-ios-telephone"></span>
+                            <p> +44 20 7336 8898</p>
+                        </div>
+                        <div class="address">
+                            <span class="ion-ios-email"></span>
+                            <p> tom@perrin.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--User profile details ends-->
+
+    </div>
+    <!--Page Wrapper ends-->
+    <!--Footer Starts-->
+    <div class="footer-wrapper no-pad-tb footer-fixed">
+        <div class="footer-top-area section-padding" style="background-color: black;">
+
+            <div class="container">
+                <div class="row nav-folderized">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-logo">
+                            <a class="navbar-brand" style="color:#44d62c">ZDAC</a>
+                            <div class="company-desc">
+                                <p>
+                                    Razer Fintech Digital</br> Hackathon
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Links</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Login</a></li>
+                                <li><a class="link-hov style1" href="#">My Account</a></li>
+                                <li><a class="link-hov style1" href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Products</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Grant</a></li>
+                                <li><a class="link-hov style1" href="#">Loans</a></li>
+                                <li><a class="link-hov style1" href="#">Crowdfund</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Powered By:</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Razer</a></li>
+                                <li><a class="link-hov style2" href="#">AWS</a></li>
+                                <li><a class="link-hov style2" href="#">VISA</a></li>
+                                <li><a class="link-hov style2" href="#">Mambu</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title"></br></h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Perx</a></li>
+                                <li><a class="link-hov style2" href="#">FWD</a></li>
+                                <li><a class="link-hov style2" href="#">PWC</a></li>
+                                <li><a class="link-hov style2" href="#">SMU</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area" style="background-color: #44d62c;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <p>&copy; 2019 ZDAC. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer ends-->
+
+    <!--Scripts starts-->
+    <!--plugin js-->
+    <script src="/static/js/plugin.js"></script>
+    <!--Main js-->
+    <script src="/static/js/main.js"></script>
+    <!--Scripts ends-->
+
+    <script src="/static/js/index_validation.js"></script>
+
+
+
+
+
 </body>
+
+</html>
