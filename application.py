@@ -1,32 +1,56 @@
-from flask import Flask
+from flask import Flask, redirect, url_for, render_template, request
+import json
 
-# print a nice greeting.
-def say_hello(username = "World"):
-    return '<p>Hello %s!</p>\n' % username
-
-# some bits of text for the page.
-header_text = '''
-    <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
-instructions = '''
-    <p><em>Hint</em>: This is a RESTful web service! Append a username
-    to the URL (for example: <code>/Thelonious</code>) to say hello to
-    someone specific.</p>\n'''
-home_link = '<p><a href="/">Back</a></p>\n'
-footer_text = '</body>\n</html>'
-
-# EB looks for an 'application' callable by default.
 application = Flask(__name__)
 
-# add a rule for the index page.
-application.add_url_rule('/', 'index', (lambda: header_text +
-    say_hello() + instructions + footer_text))
+@application.route('/')
+def home_page():
+    return render_template("index.html")
 
-# add a rule when the page is accessed with a name appended to the site
-# URL.
-application.add_url_rule('/<username>', 'hello', (lambda username:
-    header_text + say_hello(username) + home_link + footer_text))
+@application.route('/grants')
+def grant_page():
+    return render_template('grants.html')
 
-# run the app.
+@application.route('/loans')
+def loan_page():
+    return render_template('loans.html')
+
+@application.route('/loans_processing', methods = ['POST', 'GET'])
+def loanprocessing_page():
+ if request.method == 'POST':
+  result = request.form
+
+  firstName = result["firstName"]
+  lastName = result["lastName"]
+  preferredLanguage = "ENGLISH"
+  notes = result["grant"]
+  assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+  basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
+
+  identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
+  issuingAuthority = "Immigration Authority of Singapore"
+  documentType = "NRIC/Passport Number"
+  validUntil = "2021-09-12"
+  documentId = "S9812345A"
+  identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
+
+  createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
+  print(createClientJson)
+
+  return render_template('loans_processing.html', result = result)
+ else:
+  return redirect(url_for('loan_page'))
+
+@application.route('/crowdsourcing')
+def crowdsourcing():
+    return render_template('crowdsourcing.html')
+
+@application.route('/index2')
+def home_page2():
+    return render_template("index2.html")
+
+
+
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
