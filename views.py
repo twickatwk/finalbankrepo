@@ -32,7 +32,7 @@ class LoginForm(FlaskForm):
 @application.route('/', methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('grant_page'))
 
     registration_form = RegistrationForm()
     login_form = LoginForm()
@@ -109,7 +109,7 @@ def login():
         if user and check_password_hash(user.password, login_form.password.data):
             login_user(user)
             session.permanent = True
-            return redirect(url_for('home'))
+            return redirect(url_for('grant_page'))
 
     return render_template("index.html",  registration_form=registration_form, login_form=login_form)
 
@@ -207,8 +207,8 @@ def loanprocessing_page():
         interestRate = "2"
         arrearsTolerancePeriod = "0"
         gracePeriod = "0"
-        repaymentInstallments = str(result["repaymentInstallments"])
-        repaymentPeriodCount = result["repaymentPeriodCount"]
+        repaymentInstallments = "10"
+        repaymentPeriodCount = "1"
         periodicPayment = 0
         repaymentPeriodUnit = result["repayment_period_unit"]
         value = current_user.first_name + current_user.last_name + str(random.randint(1,88888))
@@ -297,3 +297,33 @@ def addFunds():
         return ""
 
     return ""
+
+
+
+@application.route('/cs_processing', methods = ['POST', 'GET'])
+#@login_required
+def csprocessing_page():
+    if request.method == 'POST':
+        result = request.form
+        currUserID = current_user.user_id
+
+        #Create new loan
+        project_name = result["projectName"]
+        project_goal = result["fundingGoals"]
+        project_description = result["list_info"]
+        new_Project = Project(project_name=project_name,
+                        project_goal=project_goal,
+                        project_description=project_description,
+                        user_id = currUserID)
+        db.session.add(new_Project)
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash('Something went wrong. Please try again.')
+            return redirect(url_for('grant_page'))
+
+        flash('You have successfully added your project.')
+        return redirect(url_for('grant_page'))
+    else:
+        return redirect(url_for('grant_page'))

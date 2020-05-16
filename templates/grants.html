@@ -39,7 +39,7 @@
 
 
         <!-- Document Title -->
-        <title>ZDAC - Grants</title>
+        <title>ZDAC</title>
     </head>
 
 <body>
@@ -87,7 +87,7 @@
                                                             <span> +65 91234567</span>
                                                         </li>
                                                         <li>
-                                                            <h6>Comapny name :</h6>
+                                                            <h6>Company name :</h6>
                                                             <span>Pineapple Pen</span>
                                                         </li>
                                                         <li>
@@ -146,9 +146,9 @@
                                     
                                     <div class="col-md-12 mar-tb-30" id="yourgrantbox" style="border: #44d62c 1px solid;">
                                     <h6>Your Grant(s)</h6>
-                                    <div class="col-md-4 mar-tb-30 text-center" style="border: #44d62c 1px solid;">
-                                        <p>Innovation and Capability Voucher (ICV)</p>
-                                        Awarded on 13 May 2020
+                                    <div class="col-md-4 mar-tb-30 text-center" style="border: #44d62c 1px solid;margin-bottom: 10px 10px 10px 10px">
+                                        <p style="margin: 10px 10px 10px 10px;">Innovation and Capability Voucher (ICV)</p>
+                                        <p style="margin: 10px 10px 10px 10px;color: white;">Awarded on 13 May 2020</p>
                                     </div>
                                     </div>
                                     
@@ -158,7 +158,7 @@
                                                 <div class="col-md-6">
                                                     <div class="sidebar-widget follow">
                                                         <div class="follow-img">
-                                                            <p>Product and Innovation Credit (PIC)</p></br>
+                                                            <p style="background-color: black;">Product and Innovation Credit (PIC)</p></br>
                                                             Eligibility criteria:
                                                             </br></br>
                                                             <ol>
@@ -173,17 +173,18 @@
                                                         </div>
 
                                                         <div class="text-center" style="background-color: black;">
-                                                            <a href="#" class="btn v3"
-                                                                style="width:30%;margin: 10px 0px 10px 0px;"><i
-                                                                    class="icofont-plus-circle"></i>
-                                                                Apply</a>
+                                                            <a href="http://www.sba.sg/sme-enhanced-training" class="btn v3"
+                                                                style="width:30%;margin: 10px 0px 10px 0px;">
+                                                                <!-- <i
+                                                                    class="icofont-plus-circle"></i> -->
+                                                                View More</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="sidebar-widget follow">
                                                         <div class="follow-img">
-                                                            <p>Innovation and Capability Voucher (ICV)</p></br>
+                                                            <p style="background-color: black;">Innovation and Capability Voucher (ICV)</p></br>
                                                             Eligibility criteria:
                                                             </br></br>
                                                             <ol>
@@ -198,10 +199,11 @@
                                                         </div>
 
                                                         <div class="text-center" style="background-color: black;">
-                                                            <a href="#" class="btn v3"
-                                                                style="width:30%;margin: 10px 0px 10px 0px;"><i
-                                                                    class="icofont-plus-circle"></i>
-                                                                Apply</a>
+                                                            <a href="http://www.sba.sg/sme-enhanced-training" class="btn v3"
+                                                                style="width:30%;margin: 10px 0px 10px 0px;">
+                                                                <!-- <i
+                                                                    class="icofont-plus-circle"></i> -->
+                                                                View More</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,12 +222,14 @@
 
                                             
 
+
+
                                             <div class="col-md-12 mar-tb-20 text-center hero-catagory-wrapper v1" >
                                                 {% for value in all_loans %}
-                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
+                                                <a href="#" class="hero-category-content v1">
                                                     
-                                                    <p style="color: #44d62c;"class="name">Loan ID : {{value.loanacc_key}} Loan Amount:  {{value.loan_amount}} </p>
-                                                    <!--p class="d-name">Loan Details</p-->
+                                                    <p class="name">Loan ID : {{value.loanacc_key}} </p>
+                                                    <p class="d-name">Loan Amount:  ${{'%0.2f'| format(value.loan_amount|float)}} </p>
                                                 </a>
                                                 {% endfor %}
                                                
@@ -250,7 +254,7 @@
                                                                     <li class="option" value = "Startup Loan">Startup Loan</li>
                                                                 </ul>
                                                             </div-->
-                                                            <select id="loanName" name="loanName">
+                                                            <select class = "nice-select filter-input" id="loanName" name="loanName">
                                                                 <option value="Student Loan">Student Loan</option>
                                                                 <option value="SME Loan">SME Loan</option>
                                                                 <option value="Startup Loan">Startup Loan</option>
@@ -260,18 +264,21 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label>Repayment Installment</label>
+                                                            <input type="text" class="form-control filter-input" value="10" id="repaymentInstallments" name="repaymentInstallments" disabled="disabled" style="background-color: grey;">
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label>Loan Amount</label>
                                                             <input type="text" class="form-control filter-input" placeholder="$SGD" id="loanAmount" name="loanAmount">
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Interest Rate (%)</label>
-                                                            <input type="text" class="form-control filter-input" value=0.10 disabled="disabled" placeholder="2.00" id="interestRate" name="interestRate" style="background-color: grey;">
-                                                            
-                                                        </div>
-                                                    </div>
                                                     
                                                     <!-- <div class="col-md-6">
                                                         <div class="form-group">
@@ -287,17 +294,20 @@
                                                         </div>
                                                     </div> -->
 
+                                                    
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Repayment Installment</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="10" id="repaymentInstallments" name="repaymentInstallments">
+                                                            <label>Repayment Period Count</label>
+                                                            <input type="text" class="form-control filter-input" value="1" id="repaymentPeriodCount" name="repaymentPeriodCount" disabled="disabled" style="background-color: grey;">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Repayment Period Count</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="1" id="repaymentPeriodCount" name="repaymentPeriodCount">
+                                                            <label>Interest Rate (%)</label>
+                                                            <input type="text" class="form-control filter-input" value=0.10 id="interestRate" name="interestRate" disabled="disabled" style="background-color: grey;">
+                                                            
                                                         </div>
                                                     </div>
 
@@ -319,7 +329,7 @@
                                                                     
                                                                 </ul>
                                                             </div-->
-                                                            <select id="repayment_period_unit" name="repayment_period_unit">
+                                                            <select class="nice-select filter-input" id="repayment_period_unit" name="repayment_period_unit">
                                                                 <option value="WEEKS">WEEKS</option>
                                                                 <option value="MONTHS">MONTHS</option>
                                                                 <option value="YEARS">YEARS</option>
@@ -327,7 +337,7 @@
                                                         </div>
                                                     </div>
                                                     <div class=" col-md-12 text-center" style="background-color: black;">
-                                                        <input type="submit" value="Apply" class="icofont-plus-circle" style="margin: 10px 0px 10px 0px;">
+                                                        <input class="btn v3" type="submit" value="Apply Loan" style="margin: 10px 0px 10px 0px;">
                                                     </div>
 
                                                     <!-- <div class="col-md-12">
@@ -410,7 +420,7 @@
 
                                         <div class="col-md-12 mar-tb-30" style="border: #44d62c 1px solid;"id="loanApplicationForm">
                                             
-                                            <form id="loan-application-form col-md-6 " action="/..." method="post">
+                                            <form id="loan-application-form col-md-6 " action="/cs_processing" method="post">
 
                                                 <h6>Crowdsource for your project!</h6>
                                                 
@@ -419,7 +429,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Project Name</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="Project Title" id="projectName">
+                                                            <input type="text" class="form-control filter-input" placeholder="Project Title" id="projectName" name="projectName">
                                                         </div>
                                                     </div>
 
@@ -428,7 +438,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Funding Goals</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="fundingGoals">
+                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="fundingGoals" name = "fundingGoals">
                                                         
                                                         </div>
                                                     </div>
@@ -438,19 +448,15 @@
                                                         <form>
                                                             <div class="form-group">
                                                                 <label for="list_info">Description</label>
-                                                                <textarea class="form-control" id="list_info" rows="4" placeholder="Enter your text here"></textarea>
+                                                                <textarea class="form-control" id="list_info" name="list_info" rows="4" placeholder="Enter your text here"></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
 
                                                     <div class=" col-md-12 text-center" style="background-color: black;">
-                                                        <a href="#" class="btn v3"
-                                                            style="margin: 10px 0px 10px 0px;"><i
-                                                                class="icofont-plus-circle"></i>
-                                                            Start Project!</a>
+                                                        <input class="btn v3" type="submit" value="Start Project!"  style="margin: 10px 0px 10px 0px;">
                                                     </div>
 
-                                                    
                 
                                                     <!-- <div class="col-md-12">
                                                         <div class="form-group">

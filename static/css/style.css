@@ -2396,6 +2396,7 @@ ul.list-inline li {
     border: 1px solid rgba(30, 195, 139, 0.4);
     border-radius: 4px;
     border: #44d62c 1px solid;
+    color: white;
 }
 
 .hero-category-content i {
@@ -5254,7 +5255,7 @@ ul.icon li::before {
     text-align: center;
     padding: 25px 25px 10px 25px;
     color: white;
-    background-color: #44d62c
+    background-color: black
 }
 
 .follow-img img {
