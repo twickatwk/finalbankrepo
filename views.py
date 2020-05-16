@@ -108,7 +108,10 @@ def logout():
 
 @application.route('/grants')
 def grant_page():
-    return render_template('grants.html')
+    currUserFirstName = current_user.first_name
+    currUserLastName = current_user.last_name
+
+    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName)
 
 @application.route('/loans')
 #@login_required
