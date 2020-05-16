@@ -1,7 +1,7 @@
 # Import Flask modules for use
 from flask import Flask, redirect, url_for, render_template, request, jsonify
 import json
-import requests
+import request
 
 # Defines an application in Flask
 application = Flask(__name__)

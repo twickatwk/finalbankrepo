@@ -61,7 +61,10 @@ li {
     margin: 0;
     padding: 0;
 }
-
+p {
+    color: white;
+    margin-top: 5px;
+}
 a {
     color: #141414;
     text-decoration: none;
@@ -86,10 +89,10 @@ h3,
 h4,
 h5,
 h6 {
-    color: #141414;
+    color: #44d62c;
     font-family: 'poppins', sans-serif;
-    margin-top: 0;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     letter-spacing: .025em;
     /* line-height: 1.6; */
 }
@@ -2365,17 +2368,17 @@ ul.list-inline li {
 ------------------------------------------*/
 
 .hero-catagory-wrapper {
-    /* width: calc(100% + 20px); */
-    left: -20px;
+    width: calc(100% + 20px);
+    left: -15px;
     position: relative;
     display: flex;
     flex-wrap: wrap;
 }
 
 .hero-category-content {
-    /* width: calc(100% * (1/6) - 20px); */
+    width: calc(100% * (1/3) - 20px);
     float: left;
-    margin: 0 0 0 20px;
+    margin: 10px 0 0 20px;
     padding: 30px 16px;
     text-align: center;
     transition: .4s;
@@ -4503,7 +4506,7 @@ ul.icon li::before {
 .filter-input {
 
     border: 1px solid #ddd;
-    margin-top: 25px;
+    /* margin-top: 25px; */
     border-radius: 3px;
     width: 100%;
     padding: 10px 20px;
@@ -4981,9 +4984,9 @@ ul.icon li::before {
     color: white;
 }
 
-.list-details-section {
-    /* padding-top: 80px; */
-}
+/* .list-details-section {
+    /* padding-top: 80px; 
+} */
 
 .list-details-section:first-child {
     padding-top: 30px !important;
@@ -5069,7 +5072,7 @@ ul.icon li::before {
 
 .similar-title-box p {
     display: inline-block;
-    float: right;
+    /* float: right; */
     font-size: 13px;
     line-height: 1.7;
 }
@@ -6416,7 +6419,7 @@ ul.business-hours li span {
 
 label.fix_spacing {
     font-size: 16px;
-    line-height: 50px;
+    line-height: 20px;
     margin-bottom: 0;
     font-weight: 400 !important;
 }
@@ -6607,7 +6610,7 @@ input[type="radio"] {
 .payment-options .custom-checkbox .card-options {
 
     display: inline-block;
-    float: right;
+    /* float: right; */
 
 }
 
@@ -6746,9 +6749,9 @@ input[type="radio"] {
     padding-right: 0;
 }
 
-.user_info_menu {
+/* .user_info_menu {
     border-bottom: 1px solid #ddd;
-}
+} */
 
 .user_info_menu .nav-tabs {
     border-bottom: none;
@@ -7095,10 +7098,8 @@ input[type="radio"] {
     background-color: #1CBBB4;
 }
 
-.switcher-button i:before {
-    -webkit-animation: rotation 2s infinite linear;
-}
 
+/* 
 @-webkit-keyframes rotation {
     from {
         -webkit-transform: rotate(0deg);
@@ -7107,7 +7108,7 @@ input[type="radio"] {
     to {
         -webkit-transform: rotate(359deg);
     }
-}
+} */
 
 
 /*-------------------------------------------
@@ -7200,7 +7201,7 @@ input[type="radio"] {
 
 span.infobox_rate {
     display: inline-block !important;
-    float: right;
+    /* float: right; */
     background-color: #f91;
     font-weight: 500;
     text-align: center;
