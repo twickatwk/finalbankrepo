@@ -8,6 +8,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 import json
 from models import User, Grant
 from application import db
+import requests
 
 
 class RegistrationForm(FlaskForm):
@@ -139,6 +140,9 @@ def loanprocessing_page():
         headers = {'content-type': 'application/json'}
         response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
         print(response.text)
+        return render_template('loans_processing.html', result = result)
+    else:
+        return redirect(url_for('loan_page'))
 
 @application.route('/crowdsourcing')
 def crowdsourcing():
