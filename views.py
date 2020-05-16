@@ -1,4 +1,4 @@
-from flask import redirect, url_for, render_template, request, flash, session
+from flask import redirect, url_for, render_template, request, flash, session,jsonify
 from application import application
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, BooleanField
@@ -152,3 +152,10 @@ def crowdsourcing():
 def investors_page():
     
     return render_template('investors.html')
+
+@application.route("/getProjects")
+def getProjects():
+    # this is the piece to be changed
+    data_set = {"SpaceX": ["Falcon Rocket", "Falcon 9 is a partially reusable two-stage-to-orbit medium lift launch vehicle designed and manufactured by SpaceX in the United States. It is powered by Merlin engines, also developed by SpaceX, burning cryogenic liquid oxygen and rocket-grade kerosene as propellants."], "DeepMind": ["AlphaGo", "AlphaGo is a computer program that plays the board game Go."]}
+    # Convert dataset into JSON object and return it
+    return jsonify(data_set)
