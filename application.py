@@ -1,6 +1,8 @@
+# Import Flask modules for use
 from flask import Flask, redirect, url_for, render_template, request
 import json
 
+# Defines an application in Flask
 application = Flask(__name__)
 
 @application.route('/')
@@ -49,6 +51,9 @@ def crowdsourcing():
 def home_page2():
     return render_template("index2.html")
 
+@application.route('/investors')
+def investors_page():
+    return render_template('investors.html')
 
 
 if __name__ == "__main__":
