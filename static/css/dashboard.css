@@ -1631,7 +1631,7 @@ ul.buttons li {
 
 .db-profile-info > li {
     border-bottom: 1px solid #ddd;
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
 }
 
 .db-profile-info li:last-child {
