@@ -141,6 +141,7 @@ def getProjectsByUser():
     return jsonify(data_set)
 
 @application.route('/grants')
+@login_required
 def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
@@ -154,12 +155,12 @@ def grant_page():
     return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName,  all_loans = all_loans)
 
 @application.route('/loans')
-#@login_required
+@login_required
 def loan_page():
     return render_template('loans.html')
 
 @application.route('/loans_processing', methods = ['POST', 'GET'])
-#@login_required
+@login_required
 def loanprocessing_page():
     if request.method == 'POST':
         result = request.form
@@ -258,16 +259,19 @@ def loanprocessing_page():
 
 # This code might not be needed
 @application.route('/crowdsourcing')
+@login_required
 def crowdsourcing():
     return render_template('crowdsourcing.html')
 
 # End Point to render crowdsourcing web page back to the user
 @application.route('/investors')
+@login_required
 def investors_page():
     return render_template('investors.html')
 
 # API endpoint for react to obtain all Projects
 @application.route("/getProjects")
+@login_required
 def getProjects():
     # SQL Alchemy Code to retrieve all data from the db
     results = Project.query.all()
@@ -280,6 +284,7 @@ def getProjects():
     return jsonify(data_set)
 
 @application.route("/addFunds")
+@login_required
 def addFunds():
     amount = request.args.get('amount')
     project_id = request.args.get('pid')
@@ -301,7 +306,7 @@ def addFunds():
 
 
 @application.route('/cs_processing', methods = ['POST', 'GET'])
-#@login_required
+@login_required
 def csprocessing_page():
     if request.method == 'POST':
         result = request.form
