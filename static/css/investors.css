@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'tomorrowfont';
+    src: url('../fonts/Tomorrow.ttf')
+}
+
+body {
+    font-family: 'tomorrowfont';
+    overflow-x: hidden;
+}
+
+#title {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#nametxt {
+    color: #66B933;
+    margin-left: 1rem;
+}
+
+#linktxt {
+    color:white; 
+}
+
+.narbar {
+    background-color: #000000;
+}
+
+#nametxt2 {
+    font-size: 10px;
+}
+
+.card {
+    max-width: 30rem;
+    margin: 5rem;
+}

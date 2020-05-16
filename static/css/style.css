@@ -4932,7 +4932,7 @@ ul.icon li::before {
     border-left: none;
     border-right: none;
     font-size: 16px;
-    color: #000;
+    color: white;
     padding: 10px 0;
 }
 
@@ -4946,6 +4946,7 @@ ul.icon li::before {
     margin-right: 45px;
     position: relative;
     padding: 10px 0;
+    color: white;
 }
 
 
@@ -4977,6 +4978,7 @@ ul.icon li::before {
 
 .list-details-tab .nav-item a {
     font-size: 16px;
+    color: white;
 }
 
 .list-details-section {
@@ -5243,7 +5245,8 @@ ul.icon li::before {
 .follow-img {
     text-align: center;
     padding: 25px 25px 10px 25px;
-    color: #3e434b;
+    color: white;
+    background-color: #44d62c
 }
 
 .follow-img img {
