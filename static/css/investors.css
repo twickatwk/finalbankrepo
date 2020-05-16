@@ -34,3 +34,11 @@ body {
     max-width: 30rem;
     margin: 5rem;
 }
+
+.page-wrapper {
+    margin-top: 0rem;
+}
+
+.navbar {
+    margin-bottom: 0rem;
+}

@@ -13,7 +13,6 @@ class Page extends React.Component {
 
         return(
             <div>
-                <Navigator />
                 <MainTitle />
                 <ProjectRow />
             </div>
