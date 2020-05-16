@@ -7,6 +7,17 @@ function dataCallback(data) {
     console.log(allProjects["DeepMind"])
 }
 
+function sayHello(amount, projectid) {
+    alert(amount)
+    alert(projectid)
+    var url = '/addFunds?amount=' + amount + '&pid=' + projectid
+    alert(url)
+    fetch(url).then(function() {
+    // Handle response you get from the server
+        console.log("Fund is successfully added")
+    });
+}
+
 class Page extends React.Component {
     render() {
 
@@ -117,6 +128,16 @@ class ProjectRow extends React.Component {
 }
 
 class ProjectBox extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: this.props.data[0]
+        }
+        this.addFund = this.addFund.bind(this)
+    }
+    addFund(event) {
+        this.setState({value: event.target.value});
+    }
 
     render(){
         return(
@@ -140,10 +161,10 @@ class ProjectBox extends React.Component {
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-5">
-                                    <input class="form-control" type="text" placeholder="Enter SGD Amount"/>
+                                    <input onChange={this.addFund} id="amountInput" class="form-control" type="text" placeholder="Enter SGD Amount"/>
                                 </div>
                                 <div class="col-7">
-                                    <button type="submit" class="btn btn-dark">Fund this Project</button>
+                                    <div class="btn btn-dark" onClick={() => sayHello(this.state.value, this.props.data[0])}>Fund this Project</div>
                                 </div>
                             </div>
                         </div>

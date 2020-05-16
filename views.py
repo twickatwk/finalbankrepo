@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Email, Length, Optional
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
-from models import User, Grant, Project
+from models import User, Grant, Project, Investment
 from application import db
 import requests
 
@@ -209,3 +209,22 @@ def getProjects():
 
     # Convert dataset into JSON object and return it to the fetch command
     return jsonify(data_set)
+
+@application.route("/addFunds")
+def addFunds():
+    amount = request.args.get('amount')
+    project_id = request.args.get('pid')
+    new_investment = Investment(investment_amount=amount, user_id="8a8e86697217553701721d9e6e332ea1", project_id=project_id)
+
+    db.session.add(new_investment)
+
+    #TODO: Retrieve all investments for that particular project
+    
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        flash('Something went wrong. Please try again.')
+        return ""
+
+    return ""
