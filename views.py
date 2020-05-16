@@ -111,34 +111,74 @@ def grant_page():
     return render_template('grants.html')
 
 @application.route('/loans')
+#@login_required
 def loan_page():
     return render_template('loans.html')
 
 @application.route('/loans_processing', methods = ['POST', 'GET'])
+#@login_required
 def loanprocessing_page():
     if request.method == 'POST':
         result = request.form
 
-        firstName = result["firstName"]
-        lastName = result["lastName"]
+        #If client was not created previously:
+        firstName = current_user.first_name
+        lastName = current_user.last_name
         preferredLanguage = "ENGLISH"
-        notes = result["grant"]
+        notes = result["grant"] #Get from grant DB
         assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
         basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
-
         identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
         issuingAuthority = "Immigration Authority of Singapore"
         documentType = "NRIC/Passport Number"
         validUntil = "2021-09-12"
         documentId = "S9812345A"
         identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
-
         createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
-        print(createClientJson) # create client
-
-
         headers = {'content-type': 'application/json'}
         response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+        print(response.text)
+
+        #if client was already created previously
+        #if client do not have Current Account
+        curracct_name = "Digital Account"
+        accountHolderType = "CLIENT"
+        accountHolderKey = "8a8e86fd72174fdd01721b78040f2653" #replace with client encoded key
+        accountState = "APPROVED"
+        productTypeKey = "8a8e878471bf59cf0171bf6979700440"
+        accountType = "CURRENT_ACCOUNT"
+        currencyCode = "SGD"
+        allowOverdraft = "true" #if has grant == true. else == false
+        overdraftLimit = "1000"
+        overdraftInterestSettings = {"interestRate":3}
+        interestSettings = {"interestRate":"0.05"}
+        currentaccount={"name":curracct_name, "accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "accountState":accountState, "productTypeKey":productTypeKey, "accountType":accountType, "currencyCode":currencyCode, "allowOverdraft":allowOverdraft, "overdraftLimit":overdraftLimit, "overdraftInterestSettings":overdraftInterestSettings, "interestSettings":interestSettings}
+        createCurrentAccountJson = json.dumps({"savingsAccount":currentaccount})
+        headers = {'content-type': 'application/json'}
+        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings", data=createCurrentAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
+        print(response.text)
+
+        #Create new loan
+        accountHolderType = "CLIENT"
+        accountHolderKey = "8a8e86fd72174fdd01721b78040f2653" #replace with client encoded key
+        productTypeKey = "8a8e867271bd280c0171bf768cc31a89"
+        assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+        loanName = "Student Loan"
+        loanAmount = 1000
+        interestRate = "2"
+        arrearsTolerancePeriod = "0"
+        gracePeriod = "0"
+        repaymentInstallments = "10"
+        repaymentPeriodCount = "1"
+        periodicPayment = 0
+        repaymentPeriodUnit = "WEEKS"
+        value = current_user.first_name + current_user.last_name + "1"
+        customFieldID = "IDENTIFIER_TRANSACTION_CHANNEL_I"
+        disbursementDetails = {"customInformation":[{"value":value, "customFieldID":customFieldID}]}
+        loanAccountJson = {"accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "productTypeKey":productTypeKey, "assignedBranchKey":assignedBranchKey, "loanName":loanName, "loanAmount":loanAmount, "interestRate":interestRate, "arrearsTolerancePeriod":arrearsTolerancePeriod, "gracePeriod":gracePeriod, "repaymentInstallments":repaymentInstallments, "repaymentPeriodCount":repaymentPeriodCount,"periodicPayment":periodicPayment, "repaymentPeriodUnit":repaymentPeriodUnit, "disbursementDetails":disbursementDetails}
+        createLoanAccountJson = json.dumps({"loanAccount":loanAccountJson})
+        headers = {'content-type': 'application/json'}
+        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/loans", data=createLoanAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
         print(response.text)
         return render_template('loans_processing.html', result = result)
     else:
