@@ -207,8 +207,8 @@ def loanprocessing_page():
         interestRate = "2"
         arrearsTolerancePeriod = "0"
         gracePeriod = "0"
-        repaymentInstallments = str(result["repaymentInstallments"])
-        repaymentPeriodCount = result["repaymentPeriodCount"]
+        repaymentInstallments = "10"
+        repaymentPeriodCount = "1"
         periodicPayment = 0
         repaymentPeriodUnit = result["repayment_period_unit"]
         value = current_user.first_name + current_user.last_name + str(random.randint(1,88888))
