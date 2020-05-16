@@ -32,7 +32,7 @@ class LoginForm(FlaskForm):
 @application.route('/', methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('grant_page'))
 
     registration_form = RegistrationForm()
     login_form = LoginForm()
@@ -109,7 +109,7 @@ def login():
         if user and check_password_hash(user.password, login_form.password.data):
             login_user(user)
             session.permanent = True
-            return redirect(url_for('home'))
+            return redirect(url_for('grant_page'))
 
     return render_template("index.html",  registration_form=registration_form, login_form=login_form)
 
