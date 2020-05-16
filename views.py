@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Email, Length, Optional, Validatio
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
-from models import User, Grant
+from models import User, Grant, Project
 from application import db
 import requests
 
@@ -19,9 +19,10 @@ class RegistrationForm(FlaskForm):
     first_name = StringField('First Name', validators=[InputRequired()])
     last_name = StringField('Last Name', validators=[InputRequired()])
     user_name = StringField('Username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired(), validate_password_length])
-    password2 = PasswordField('Confirm Password', validators=[InputRequired(), validate_password_length])
-    
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=8)])
+    password2 = PasswordField('Confirm Password', validators=[InputRequired(), Length(min=8)])
+    nric = StringField('NRIC', validators=[InputRequired(), Length(min=9)])
+
 
 class LoginForm(FlaskForm):
     user_login = StringField('username or email', validators=[InputRequired()])
@@ -45,18 +46,38 @@ def register():
         #check whether user's 2 keyed passwords are the same
         pw1 = registration_form.password.data
         pw2 = registration_form.password2.data
-        
+
         if pw1 != pw2:
             flash('Your passwords do not match. Please try again.')
             return redirect(url_for('index'))
-        
+
+        firstName = registration_form.first_name.data
+        lastName = registration_form.last_name.data
+        preferredLanguage = "ENGLISH"
+        notes = ""
+        assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+        basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
+        identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
+        issuingAuthority = "Immigration Authority of Singapore"
+        documentType = "NRIC"
+        validUntil = "2200-01-01"
+        documentId = registration_form.nric.data
+        identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
+        createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
+        headers = {'content-type': 'application/json'}
+        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+        response_data = response.json()
+        print(response_data)
+        user_encoded_id = response_data["client"]["encodedKey"]
+        print(user_encoded_id)
+
         # ========== IMPORTANT: Wrong way to add id! Should use Mambu id ======================
         # ========== This is just a workaround to allow site to keep adding new users =========
-        id_to_add = 0
-        try:
-            id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
-        except AttributeError:
-            id_to_add = 1
+        #id_to_add = 0
+        #try:
+        #    id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
+        #except AttributeError:
+        #    id_to_add = 1
         # =====================================================================================
 
         new_user = User(user_name=registration_form.user_name.data,
@@ -64,7 +85,7 @@ def register():
                                                         method='pbkdf2:sha256'),
                         first_name=registration_form.first_name.data,
                         last_name=registration_form.last_name.data,
-                        user_id = id_to_add)
+                        user_id = user_encoded_id)
 
         db.session.add(new_user)
         try:
@@ -81,7 +102,7 @@ def register():
 
 
 @application.route('/login', methods = ['GET', 'POST'])
-def login(): 
+def login():
     registration_form = RegistrationForm()
     login_form = LoginForm()
 
@@ -107,13 +128,18 @@ def home():
 def logout():
     if current_user.is_authenticated:
         logout_user()
-        
+
     return redirect(url_for('index'))
 
 
 @application.route('/grants')
 def grant_page():
-    return render_template('grants.html', )
+    currUserFirstName = current_user.first_name
+    currUserLastName = current_user.last_name
+
+    grant = Grant.query.filter_by(user_id=1).first()
+    print(grant)
+    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName)
 
 @application.route('/loans')
 #@login_required
@@ -189,18 +215,25 @@ def loanprocessing_page():
     else:
         return redirect(url_for('loan_page'))
 
+# This code might not be needed
 @application.route('/crowdsourcing')
 def crowdsourcing():
     return render_template('crowdsourcing.html')
 
+# End Point to render crowdsourcing web page back to the user
 @application.route('/investors')
 def investors_page():
-    
     return render_template('investors.html')
 
+# API endpoint for react to obtain all Projects
 @application.route("/getProjects")
 def getProjects():
-    # this is the piece to be changed
-    data_set = {"SpaceX": ["Falcon Rocket", "Falcon 9 is a partially reusable two-stage-to-orbit medium lift launch vehicle designed and manufactured by SpaceX in the United States. It is powered by Merlin engines, also developed by SpaceX, burning cryogenic liquid oxygen and rocket-grade kerosene as propellants."], "DeepMind": ["AlphaGo", "AlphaGo is a computer program that plays the board game Go."]}
-    # Convert dataset into JSON object and return it
+    # SQL Alchemy Code to retrieve all data from the db
+    results = Project.query.all()
+    data_set = {}
+    # Loop through the results array and add it into the dictionary of Project objects
+    for record in results:
+        data_set[record.project_id] = [record.project_name, record.project_description, str(record.project_goal)]
+
+    # Convert dataset into JSON object and return it to the fetch command
     return jsonify(data_set)
