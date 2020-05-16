@@ -297,3 +297,33 @@ def addFunds():
         return ""
 
     return ""
+
+
+
+@application.route('/cs_processing', methods = ['POST', 'GET'])
+#@login_required
+def csprocessing_page():
+    if request.method == 'POST':
+        result = request.form
+        currUserID = current_user.user_id
+
+        #Create new loan
+        project_name = result["projectName"]
+        project_goal = result["fundingGoals"]
+        project_description = result["list_info"]
+        new_Project = Project(project_name=project_name,
+                        project_goal=project_goal,
+                        project_description=project_description,
+                        user_id = currUserID)
+        db.session.add(new_Project)
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash('Something went wrong. Please try again.')
+            return redirect(url_for('grant_page'))
+
+        flash('You have successfully added your project.')
+        return redirect(url_for('grant_page'))
+    else:
+        return redirect(url_for('grant_page'))
