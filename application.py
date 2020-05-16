@@ -1,6 +1,7 @@
 # Import Flask modules for use
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, jsonify
 import json
+import requests
 
 # Defines an application in Flask
 application = Flask(__name__)
@@ -37,7 +38,12 @@ def loanprocessing_page():
   identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
 
   createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
-  print(createClientJson)
+  print(createClientJson) # create client
+
+
+  headers = {'content-type': 'application/json'}
+  response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+  print(response.text)
 
   return render_template('loans_processing.html', result = result)
  else:
