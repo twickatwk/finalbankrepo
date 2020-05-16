@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+</html>
+
+<head>
+
+    <head>
+
+        <!-- Custom React Component -->
+        <script type="text/babel" src="{{ url_for('static', filename='js/navigator.js') }}"></script>
+        <!-- Bootstrap CDNs-->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <!-- Metas -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="LionCoders" />
+        <!-- Links -->
+        <link rel="icon" type="image/png" href="#" />
+        <!-- google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+        <!-- Plugins CSS -->
+        <link href="/static/css/plugin.css" rel="stylesheet" />
+        <!-- style CSS -->
+        <link href="/static/css/style.css" rel="stylesheet" />
+        <link href="/static/css/dashboard.css" rel="stylesheet" />
+
+        <!-- React CDNs-->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- Custom CSS Style Sheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/investors.css') }}">
+
+
+        <!-- Document Title -->
+        <title>ZDAC - Grants</title>
+    </head>
+
+<body style="background-color: black;">
+
+    <!--Page Wrapper starts-->
+    <div class="page-wrapper fixed-footer mar-bb-30">
+        <div id="navigator"></div>
+
+        <!--User Profile starts-->
+            <div class="col-lg-12 col-md-12 list-details-section section-padding user-profile section-padding " ;>
+                <div class="text-center" style="height: 200px;background-color: black;">
+                
+                    <div style="font-size:80px;color: white;">Sorry but someone ran away with the link! HEAD BACK <a style="color: #44d62c;" href="/home">HOME</a> instead</div>
+                                 
+                </div>
+                <!--Dashboard content starts-->
+                <div class="dash-content " style="background-color: black;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 2 mar-bot-20 mar-top-100">
+                                <div style="background-color: black;" class="recent-activity">
+                                    <div style="width:75%;height: 700px"class="act-title text-center ">
+                                        
+                                    <i style="color: white;font-size: 400px;"
+                                                class="ion-sad-outline wrapper"></i></div>
+                                </div>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Dashboard content ends-->
+            </div>
+
+    </div>
+    <!--Page Wrapper ends-->
+    <!--Footer Starts-->
+    <div class="footer-wrapper no-pad-tb footer-fixed">
+        <div class="footer-top-area section-padding" style="background-color: black;">
+
+            <div class="container">
+                <div class="row nav-folderized" style="height: 150px;">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-logo">
+                            <a class="navbar-brand" style="color:#44d62c">ZDAC</a>
+                            <div class="company-desc">
+                                <p>
+                                    Razer Fintech Digital</br> Hackathon
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Links</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Login</a></li>
+                                <li><a class="link-hov style1" href="#">My Account</a></li>
+                                <li><a class="link-hov style1" href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Products</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Grant</a></li>
+                                <li><a class="link-hov style1" href="#">Loans</a></li>
+                                <li><a class="link-hov style1" href="#">Crowdfund</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Powered By:</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Razer</a></li>
+                                <li><a class="link-hov style2" href="#">AWS</a></li>
+                                <li><a class="link-hov style2" href="#">VISA</a></li>
+                                <li><a class="link-hov style2" href="#">Mambu</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title"></br></h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Perx</a></li>
+                                <li><a class="link-hov style2" href="#">FWD</a></li>
+                                <li><a class="link-hov style2" href="#">PWC</a></li>
+                                <li><a class="link-hov style2" href="#">SMU</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area" style="background-color: #44d62c;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <p>&copy; 2019 ZDAC. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer ends-->
+
+    <!--Scripts starts-->
+    <!--plugin js-->
+    <script src="/static/js/plugin.js"></script>
+    <!--Main js-->
+    <script src="/static/js/main.js"></script>
+    <!--Scripts ends-->
+
+    <script src="/static/js/index_validation.js"></script>
+
+    <style type=text/css>
+        .wrapper { 
+        height: 100%;
+        width: 100%;
+        left:0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+        background-size: 1800% 1800%;
+
+        -webkit-animation: rainbow 18s ease infinite;
+        -z-animation: rainbow 18s ease infinite;
+        -o-animation: rainbow 18s ease infinite;
+        animation: rainbow 18s ease infinite;}
+
+        @-webkit-keyframes rainbow {
+            0%{background-position:0% 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0% 82%}
+        }
+        @-moz-keyframes rainbow {
+            0%{background-position:0% 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0% 82%}
+        }
+        @-o-keyframes rainbow {
+            0%{background-position:0% 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0% 82%}
+        }
+        @keyframes rainbow { 
+            0%{background-position:0% 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0% 82%}
+        }
+    </style>
+
+
+
+</body>
+
+</html>
