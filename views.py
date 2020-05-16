@@ -2,7 +2,7 @@ from flask import redirect, url_for, render_template, request, flash, session,js
 from application import application
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, BooleanField
-from wtforms.validators import InputRequired, Email, Length, Optional
+from wtforms.validators import InputRequired, Email, Length, Optional, ValidationError
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
@@ -10,6 +10,10 @@ from models import User, Grant, Project, Investment
 from application import db
 import requests
 
+def validate_password_length(form, field):
+    password = field.data
+    if len(password) < 8:
+        raise ValidationError("Password needs to be at least 8 characters long")
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('First Name', validators=[InputRequired()])
@@ -17,7 +21,8 @@ class RegistrationForm(FlaskForm):
     user_name = StringField('Username', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8)])
     password2 = PasswordField('Confirm Password', validators=[InputRequired(), Length(min=8)])
-    
+    nric = StringField('NRIC', validators=[InputRequired(), Length(min=9)])
+
 
 class LoginForm(FlaskForm):
     user_login = StringField('username or email', validators=[InputRequired()])
@@ -41,18 +46,33 @@ def register():
         #check whether user's 2 keyed passwords are the same
         pw1 = registration_form.password.data
         pw2 = registration_form.password2.data
-        
+
         if pw1 != pw2:
             flash('Your passwords do not match. Please try again.')
-            return redirect(url_for('register'))
-        
-        # ========== IMPORTANT: Wrong way to add id! Should use Mambu id ======================
-        # ========== This is just a workaround to allow site to keep adding new users =========
-        id_to_add = 0
+            return redirect(url_for('index'))
+
+        # ==========  Mambu  ======================
         try:
-            id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
-        except AttributeError:
-            id_to_add = 1
+            firstName = registration_form.first_name.data
+            lastName = registration_form.last_name.data
+            preferredLanguage = "ENGLISH"
+            notes = ""
+            assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+            basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
+            identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
+            issuingAuthority = "Immigration Authority of Singapore"
+            documentType = "NRIC"
+            validUntil = "2200-01-01"
+            documentId = registration_form.nric.data
+            identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
+            createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
+            headers = {'content-type': 'application/json'}
+            response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+            response_data = response.json()
+            user_encoded_id = response_data["client"]["encodedKey"]
+        except Exception as e:
+            flash('Something went wrong. Please try again.')
+            return redirect(url_for('index'))
         # =====================================================================================
 
         new_user = User(user_name=registration_form.user_name.data,
@@ -60,7 +80,7 @@ def register():
                                                         method='pbkdf2:sha256'),
                         first_name=registration_form.first_name.data,
                         last_name=registration_form.last_name.data,
-                        user_id = id_to_add)
+                        user_id = user_encoded_id)
 
         db.session.add(new_user)
         try:
@@ -68,15 +88,16 @@ def register():
         except Exception as e:
             db.session.rollback()
             flash('Something went wrong. Please try again.')
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
 
         flash('You have successfully registered your account. Please login again to confirm.')
+        return redirect(url_for('index'))
 
     return render_template("index.html",  registration_form=registration_form, login_form=login_form)
 
 
 @application.route('/login', methods = ['GET', 'POST'])
-def login(): 
+def login():
     registration_form = RegistrationForm()
     login_form = LoginForm()
 
@@ -102,7 +123,7 @@ def home():
 def logout():
     if current_user.is_authenticated:
         logout_user()
-        
+
     return redirect(url_for('index'))
 
 
@@ -111,6 +132,8 @@ def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
 
+    grant = Grant.query.filter_by(user_id=1).first()
+    print(grant)
     return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName)
 
 @application.route('/loans')
