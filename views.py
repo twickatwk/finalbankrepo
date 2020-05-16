@@ -2,7 +2,7 @@ from flask import redirect, url_for, render_template, request, flash, session,js
 from application import application
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, BooleanField
-from wtforms.validators import InputRequired, Email, Length, Optional
+from wtforms.validators import InputRequired, Email, Length, Optional, ValidationError
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
@@ -10,13 +10,17 @@ from models import User, Grant
 from application import db
 import requests
 
+def validate_password_length(form, field):
+    password = field.data
+    if len(password) < 8:
+        raise ValidationError("Password needs to be at least 8 characters long")
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('First Name', validators=[InputRequired()])
     last_name = StringField('Last Name', validators=[InputRequired()])
     user_name = StringField('Username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired(), Length(min=8)])
-    password2 = PasswordField('Confirm Password', validators=[InputRequired(), Length(min=8)])
+    password = PasswordField('Password', validators=[InputRequired(), validate_password_length])
+    password2 = PasswordField('Confirm Password', validators=[InputRequired(), validate_password_length])
     
 
 class LoginForm(FlaskForm):
@@ -44,7 +48,7 @@ def register():
         
         if pw1 != pw2:
             flash('Your passwords do not match. Please try again.')
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
         
         # ========== IMPORTANT: Wrong way to add id! Should use Mambu id ======================
         # ========== This is just a workaround to allow site to keep adding new users =========
@@ -68,9 +72,10 @@ def register():
         except Exception as e:
             db.session.rollback()
             flash('Something went wrong. Please try again.')
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
 
         flash('You have successfully registered your account. Please login again to confirm.')
+        return redirect(url_for('index'))
 
     return render_template("index.html",  registration_form=registration_form, login_form=login_form)
 
@@ -108,7 +113,7 @@ def logout():
 
 @application.route('/grants')
 def grant_page():
-    return render_template('grants.html')
+    return render_template('grants.html', )
 
 @application.route('/loans')
 #@login_required

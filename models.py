@@ -3,7 +3,7 @@ from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    user_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
+    user_id = db.Column(db.String(255), nullable=False, unique=True, primary_key=True)
     user_name = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(255), unique=False)
     last_name = db.Column(db.String(255), unique=False)
@@ -50,7 +50,7 @@ class Grant(db.Model):
     grant_type = db.Column(db.String(255))
     
     #user foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.String(255), db.ForeignKey('user.user_id'), nullable=False)
 
 
 class Project(db.Model):
@@ -60,7 +60,7 @@ class Project(db.Model):
     project_description = db.Column(db.Text(100000), unique=False)
 
     #user foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.String(255), db.ForeignKey('user.user_id'), nullable=False)
 
     #one to many relationship
     investments = db.relationship('Investment', backref='project', lazy=True)
@@ -71,7 +71,7 @@ class CurrentsAccount(db.Model):
     interest_rate = db.Column(db.Float(8,4))
     
     #user foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.String(255), db.ForeignKey('user.user_id'), nullable=False)
 
 class LoanAccount(db.Model):
     #encoded key
@@ -88,14 +88,14 @@ class LoanAccount(db.Model):
     value = db.Column(db.String(255))
 
     #user foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.String(255), db.ForeignKey('user.user_id'), nullable=False)
 
 class Investment(db.Model):
     investment_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     investment_amount = db.Column(db.Float(9,2))
 
     #user foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user_id = db.Column(db.String(255), db.ForeignKey('user.user_id'), nullable=False)
 
     #project foreign key
     project_id = db.Column(db.Integer, db.ForeignKey('project.project_id'), nullable=False)
