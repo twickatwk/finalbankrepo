@@ -17,6 +17,7 @@ class RegistrationForm(FlaskForm):
     user_name = StringField('Username', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8)])
     password2 = PasswordField('Confirm Password', validators=[InputRequired(), Length(min=8)])
+    nric = StringField('NRIC', validators=[InputRequired(), Length(min=9)])
     
 
 class LoginForm(FlaskForm):
@@ -45,14 +46,34 @@ def register():
         if pw1 != pw2:
             flash('Your passwords do not match. Please try again.')
             return redirect(url_for('register'))
+
+        firstName = registration_form.first_name.data
+        lastName = registration_form.last_name.data
+        preferredLanguage = "ENGLISH"
+        notes = ""
+        assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+        basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
+        identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
+        issuingAuthority = "Immigration Authority of Singapore"
+        documentType = "NRIC"
+        validUntil = "2200-01-01"
+        documentId = registration_form.nric.data
+        identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
+        createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
+        headers = {'content-type': 'application/json'}
+        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+        response_data = response.json()
+        print(response_data)
+        user_encoded_id = response_data["client"]["encodedKey"]
+        print(user_encoded_id)
         
         # ========== IMPORTANT: Wrong way to add id! Should use Mambu id ======================
         # ========== This is just a workaround to allow site to keep adding new users =========
-        id_to_add = 0
-        try:
-            id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
-        except AttributeError:
-            id_to_add = 1
+        #id_to_add = 0
+        #try:
+        #    id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
+        #except AttributeError:
+        #    id_to_add = 1
         # =====================================================================================
 
         new_user = User(user_name=registration_form.user_name.data,
@@ -60,7 +81,7 @@ def register():
                                                         method='pbkdf2:sha256'),
                         first_name=registration_form.first_name.data,
                         last_name=registration_form.last_name.data,
-                        user_id = id_to_add)
+                        user_id = user_encoded_id)
 
         db.session.add(new_user)
         try:
@@ -111,6 +132,8 @@ def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
 
+    grant = Grant.query.filter_by(user_id=1).first()
+    print(grant)
     return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName)
 
 @application.route('/loans')
