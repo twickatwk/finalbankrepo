@@ -6,9 +6,10 @@ from wtforms.validators import InputRequired, Email, Length, Optional, Validatio
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
-from models import User, Grant, Project, Investment
+from models import User, Grant, Project, CurrentsAccount, LoanAccount
 from application import db
 import requests
+import random
 
 def validate_password_length(form, field):
     password = field.data
@@ -131,10 +132,10 @@ def logout():
 def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
-
-    grant = Grant.query.filter_by(user_id=1).first()
-    print(grant)
-    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName)
+    currUserID = current_user.user_id
+    grant = Grant.query.filter_by(user_id=currUserID)
+    print(CurrentsAccount.query.filter_by(user_id = currUserID).first())
+    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName, grant = grant)
 
 @application.route('/loans')
 #@login_required
@@ -146,69 +147,96 @@ def loan_page():
 def loanprocessing_page():
     if request.method == 'POST':
         result = request.form
+        currUserID = current_user.user_id
+        print(CurrentsAccount.query.filter_by(user_id = currUserID).first() == None)
+        if(CurrentsAccount.query.filter_by(user_id = currUserID).first() == None):
+            #if client do not have Current Account
+            curracct_name = "Digital Account"
+            accountHolderType = "CLIENT"
+            accountHolderKey = currUserID
+            accountState = "APPROVED"
+            productTypeKey = "8a8e878471bf59cf0171bf6979700440"
+            accountType = "CURRENT_ACCOUNT"
+            currencyCode = "SGD"
+            allowOverdraft = "true" #if has grant == true. else == false
+            overdraftLimit = "1000"
+            overdraftInterestSettings = {"interestRate":3}
+            interestSettings = {"interestRate":"0.05"}
+            currentaccount={"name":curracct_name, "accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "accountState":accountState, "productTypeKey":productTypeKey, "accountType":accountType, "currencyCode":currencyCode, "allowOverdraft":allowOverdraft, "overdraftLimit":overdraftLimit, "overdraftInterestSettings":overdraftInterestSettings, "interestSettings":interestSettings}
+            createCurrentAccountJson = json.dumps({"savingsAccount":currentaccount})
+            headers = {'content-type': 'application/json'}
+            response = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings", data=createCurrentAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
+            response_data = response.json()
+            savingsaccount_encoded_id = response_data["savingsAccount"]["encodedKey"]
 
-        #If client was not created previously:
-        firstName = current_user.first_name
-        lastName = current_user.last_name
-        preferredLanguage = "ENGLISH"
-        notes = result["grant"] #Get from grant DB
-        assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
-        basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
-        identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
-        issuingAuthority = "Immigration Authority of Singapore"
-        documentType = "NRIC/Passport Number"
-        validUntil = "2021-09-12"
-        documentId = "S9812345A"
-        identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
-        createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
-        headers = {'content-type': 'application/json'}
-        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
-        print(response.text)
+            new_currentacct = CurrentsAccount(currentacc_key=savingsaccount_encoded_id,
+                        interest_rate = 0.05,
+                        user_id = currUserID)
 
-        #if client was already created previously
-        #if client do not have Current Account
-        curracct_name = "Digital Account"
-        accountHolderType = "CLIENT"
-        accountHolderKey = "8a8e86fd72174fdd01721b78040f2653" #replace with client encoded key
-        accountState = "APPROVED"
-        productTypeKey = "8a8e878471bf59cf0171bf6979700440"
-        accountType = "CURRENT_ACCOUNT"
-        currencyCode = "SGD"
-        allowOverdraft = "true" #if has grant == true. else == false
-        overdraftLimit = "1000"
-        overdraftInterestSettings = {"interestRate":3}
-        interestSettings = {"interestRate":"0.05"}
-        currentaccount={"name":curracct_name, "accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "accountState":accountState, "productTypeKey":productTypeKey, "accountType":accountType, "currencyCode":currencyCode, "allowOverdraft":allowOverdraft, "overdraftLimit":overdraftLimit, "overdraftInterestSettings":overdraftInterestSettings, "interestSettings":interestSettings}
-        createCurrentAccountJson = json.dumps({"savingsAccount":currentaccount})
-        headers = {'content-type': 'application/json'}
-        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/savings", data=createCurrentAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
-        print(response.text)
+            db.session.add(new_currentacct)
+            try:
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                flash('Something went wrong. Please try again.')
+                return redirect(url_for('grants'))
 
         #Create new loan
         accountHolderType = "CLIENT"
-        accountHolderKey = "8a8e86fd72174fdd01721b78040f2653" #replace with client encoded key
+        accountHolderKey = currUserID
         productTypeKey = "8a8e867271bd280c0171bf768cc31a89"
         assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
-        loanName = "Student Loan"
-        loanAmount = 1000
+        loanName = result["loanName"]
+        loanAmount = float(result["loanAmount"])
         interestRate = "2"
         arrearsTolerancePeriod = "0"
         gracePeriod = "0"
-        repaymentInstallments = "10"
-        repaymentPeriodCount = "1"
+        repaymentInstallments = str(result["repaymentInstallments"])
+        repaymentPeriodCount = result["repaymentPeriodCount"]
         periodicPayment = 0
-        repaymentPeriodUnit = "WEEKS"
-        value = current_user.first_name + current_user.last_name + "1"
-        customFieldID = "IDENTIFIER_TRANSACTION_CHANNEL_I"
+        repaymentPeriodUnit = result["repayment_period_unit"]
+        value = current_user.first_name + current_user.last_name + str(random.randint(1,88888))
+        customFieldID = str(random.randint(1,99999))
         disbursementDetails = {"customInformation":[{"value":value, "customFieldID":customFieldID}]}
         loanAccountJson = {"accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "productTypeKey":productTypeKey, "assignedBranchKey":assignedBranchKey, "loanName":loanName, "loanAmount":loanAmount, "interestRate":interestRate, "arrearsTolerancePeriod":arrearsTolerancePeriod, "gracePeriod":gracePeriod, "repaymentInstallments":repaymentInstallments, "repaymentPeriodCount":repaymentPeriodCount,"periodicPayment":periodicPayment, "repaymentPeriodUnit":repaymentPeriodUnit, "disbursementDetails":disbursementDetails}
         createLoanAccountJson = json.dumps({"loanAccount":loanAccountJson})
         headers = {'content-type': 'application/json'}
         response = requests.post("https://razerhackathon.sandbox.mambu.com/api/loans", data=createLoanAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
-        print(response.text)
-        return render_template('loans_processing.html', result = result)
+        response_data = response.json()
+        loansaccount_encoded_id = response_data["loanAccount"]["encodedKey"]
+
+        new_Loans = LoanAccount(loanacc_key=loansaccount_encoded_id,
+                        interest_rate=interestRate,
+                        loan_amount=loanAmount,
+                        arrears_tolerance_period = arrearsTolerancePeriod,
+                        grace_period = int(gracePeriod),
+                        repayment_installments = float(repaymentInstallments),
+                        repayment_period_count = int(repaymentPeriodCount),
+                        periodic_payment = periodicPayment,
+                        repayment_period_unit = repaymentPeriodUnit,
+                        customfield_id = customFieldID,
+                        value = value,
+                        user_id = currUserID)
+
+        db.session.add(new_Loans)
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash('Something went wrong. Please try again.')
+            return redirect(url_for('grants'))
+
+        flash('You have successfully applied for a loan.')
+        return redirect(url_for('grants'))
     else:
-        return redirect(url_for('loan_page'))
+        return redirect(url_for('grants'))
+
+
+# @application.errorhandler(404)
+# def page_not_found(e):
+#     # note that we set the 404 status explicitly
+#     return render_template('404.html'), 404
+
 
 # This code might not be needed
 @application.route('/crowdsourcing')

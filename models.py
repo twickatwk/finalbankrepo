@@ -81,7 +81,7 @@ class LoanAccount(db.Model):
     repayment_installments = db.Column(db.Float(9,2))
     repayment_period_count = db.Column(db.Integer)
     periodic_payment = db.Column(db.Integer)
-    repayment_period_unit = db.Column(db.Integer)
+    repayment_period_unit = db.Column(db.String(255))
     customfield_id = db.Column(db.String(255))
     value = db.Column(db.String(255))
 
