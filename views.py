@@ -145,10 +145,13 @@ def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
     currUserID = current_user.user_id
-    grant = Grant.query.filter_by(user_id=currUserID)
+    #grant = Grant.query.filter_by(user_id=currUserID)
     
-    print(CurrentsAccount.query.filter_by(user_id = currUserID).first())
-    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName, grant = grant)
+    all_loans = LoanAccount.query.filter_by(user_id=currUserID).all()
+    #for i in all_loans:
+    #    print(i.interest_rate)
+    
+    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName,  all_loans = all_loans)
 
 @application.route('/loans')
 #@login_required
@@ -192,7 +195,7 @@ def loanprocessing_page():
             except Exception as e:
                 db.session.rollback()
                 flash('Something went wrong. Please try again.')
-                return redirect(url_for('grants'))
+                return redirect(url_for('grant_page'))
 
         #Create new loan
         accountHolderType = "CLIENT"
@@ -209,13 +212,15 @@ def loanprocessing_page():
         periodicPayment = 0
         repaymentPeriodUnit = result["repayment_period_unit"]
         value = current_user.first_name + current_user.last_name + str(random.randint(1,88888))
-        customFieldID = str(random.randint(1,99999))
+        customFieldID = "IDENTIFIER_TRANSACTION_CHANNEL_I"
         disbursementDetails = {"customInformation":[{"value":value, "customFieldID":customFieldID}]}
         loanAccountJson = {"accountHolderType":accountHolderType, "accountHolderKey":accountHolderKey, "productTypeKey":productTypeKey, "assignedBranchKey":assignedBranchKey, "loanName":loanName, "loanAmount":loanAmount, "interestRate":interestRate, "arrearsTolerancePeriod":arrearsTolerancePeriod, "gracePeriod":gracePeriod, "repaymentInstallments":repaymentInstallments, "repaymentPeriodCount":repaymentPeriodCount,"periodicPayment":periodicPayment, "repaymentPeriodUnit":repaymentPeriodUnit, "disbursementDetails":disbursementDetails}
         createLoanAccountJson = json.dumps({"loanAccount":loanAccountJson})
+        print(createLoanAccountJson)
         headers = {'content-type': 'application/json'}
         response = requests.post("https://razerhackathon.sandbox.mambu.com/api/loans", data=createLoanAccountJson, headers=headers, auth=('Team66', 'passEE8295411'))
         response_data = response.json()
+        print(response_data)
         loansaccount_encoded_id = response_data["loanAccount"]["encodedKey"]
 
         new_Loans = LoanAccount(loanacc_key=loansaccount_encoded_id,
@@ -237,12 +242,12 @@ def loanprocessing_page():
         except Exception as e:
             db.session.rollback()
             flash('Something went wrong. Please try again.')
-            return redirect(url_for('grants'))
+            return redirect(url_for('grant_page'))
 
         flash('You have successfully applied for a loan.')
-        return redirect(url_for('grants'))
+        return redirect(url_for('grant_page'))
     else:
-        return redirect(url_for('grants'))
+        return redirect(url_for('grant_page'))
 
 
 # @application.errorhandler(404)
