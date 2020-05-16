@@ -222,12 +222,14 @@
 
                                             
 
+
+
                                             <div class="col-md-12 mar-tb-20 text-center hero-catagory-wrapper v1" >
                                                 {% for value in all_loans %}
-                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
+                                                <a href="#" class="hero-category-content v1">
                                                     
-                                                    <p style="color: #44d62c;"class="name">Loan ID : {{value.loanacc_key}} Loan Amount:  {{value.loan_amount}} </p>
-                                                    <!--p class="d-name">Loan Details</p-->
+                                                    <p class="name">Loan ID : {{value.loanacc_key}} </p>
+                                                    <p class="d-name">Loan Amount:  ${{'%0.2f'| format(value.loan_amount|float)}} </p>
                                                 </a>
                                                 {% endfor %}
                                                
@@ -452,10 +454,9 @@
                                                     </div>
 
                                                     <div class=" col-md-12 text-center" style="background-color: black;">
-                                                        <input type="submit" value="Start Project!" class="icofont-plus-circle" style="margin: 10px 0px 10px 0px;">
+                                                        <input class="btn v3" type="submit" value="Start Project!"  style="margin: 10px 0px 10px 0px;">
                                                     </div>
 
-                                                    
                 
                                                     <!-- <div class="col-md-12">
                                                         <div class="form-group">
