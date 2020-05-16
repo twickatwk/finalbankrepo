@@ -51,6 +51,10 @@
 /*-----------------------------------------------------------
             General Styles 
 -------------------------------------------------------------*/
+@font-face {
+    font-family: 'tomorrowfont';
+    src: url('../fonts/Tomorrow.ttf')
+}
 
 dl,
 dt,
@@ -69,7 +73,7 @@ a {
     color: transparent;
     text-decoration: none;
     position: relative;
-    font-family: "poppins", sans-serif;
+    font-family: 'tomorrowfont';
 }
 
 a:focus,
@@ -90,7 +94,7 @@ h4,
 h5,
 h6 {
     color: #44d62c;
-    font-family: 'poppins', sans-serif;
+    font-family: 'tomorrowfont';
     margin-top: 10px;
     margin-bottom: 10px;
     letter-spacing: .025em;
@@ -704,7 +708,7 @@ section.coupon {
 
 body {
     color: #777;
-    font-family: 'poppins', sans-serif;
+    font-family: 'tomorrowfont';
     font-size: 14px;
     font-weight: 300;
     overflow-x: hidden !important;
@@ -792,7 +796,7 @@ ul.list-inline li {
 .section-title {
     font-size: 2rem;
     margin-bottom: 60px;
-    font-family: "poppins", sans-serif;
+    font-family: 'tomorrowfont';
     font-weight: 400;
     position: relative;
     display: inline-block;
@@ -1561,7 +1565,7 @@ ul.list-inline li {
     position: absolute;
     content: "\f3d0";
     color: #fff;
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     top: 6px;
     right: -4px;
     font-size: 13px;
@@ -1579,7 +1583,7 @@ ul.list-inline li {
     position: absolute !important;
     content: "\f3d3" !important;
     color: #000 !important;
-    font-family: "Ionicons" !important;
+    font-family: 'tomorrowfont';
     top: 1px !important;
     right: 3px !important;
 }
@@ -1842,7 +1846,7 @@ ul.list-inline li {
 .site-mobile-menu .site-nav-wrap .arrow-collapse:before {
     font-size: 12px;
     z-index: 20;
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     content: "\f3d0";
     position: absolute;
     top: 50%;
@@ -2217,7 +2221,7 @@ ul.list-inline li {
 
 .nice-select:after {
     content: '\f35f';
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     display: block;
     pointer-events: none;
     position: absolute;
@@ -2909,7 +2913,7 @@ ul.list-inline li {
 .trending-title-box h4 a {
     font-size: 20px;
     letter-spacing: 0;
-    font-family: "poppins", sans-serif;
+    font-family: 'tomorrowfont';
 }
 
 .trending-row {
@@ -2994,7 +2998,7 @@ ul.list-inline li {
 
 
 .trending-title-box h4 {
-    font-family: "poppins", sans-serif;
+    font-family: 'tomorrowfont';
     margin-bottom: 0;
 }
 
@@ -3381,7 +3385,7 @@ ul.list-inline li {
 
 .faq-section .card-header > a[aria-expanded="true"]::before {
     content: "\f462";
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     float: right !important;
     line-height: 12px;
     font-size: 20px;
@@ -3390,7 +3394,7 @@ ul.list-inline li {
 .faq-section .card-header > a[aria-expanded="false"]::before {
     color: #777;
     content: "\f489";
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     float: right !important;
     line-height: 12px;
     font-size: 20px;
@@ -4076,7 +4080,7 @@ ul.icon li {
 
 ul.icon li::before {
     content: '\f3d3';
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     height: 10px;
     left: 20px;
     position: absolute;
@@ -4165,7 +4169,7 @@ ul.icon li::before {
 
 .post-nav .page-prev a span::before {
     content: '\f3d2';
-    font-family: 'Ionicons';
+    font-family: 'tomorrowfont';
     font-size: 18px;
     font-weight: 400;
     left: 0;
@@ -4213,7 +4217,7 @@ ul.icon li::before {
 
 .post-nav .page-next a span::after {
     content: '\f3d3';
-    font-family: 'Ionicons';
+    font-family: 'tomorrowfont';
     font-size: 18px;
     font-weight: 400;
     line-height: 0.8;
@@ -4378,7 +4382,7 @@ ul.icon li::before {
 
 .theme-menu .filter-sub-menu.style1 ul li.has-sub > a:after{
     content: "\f218";
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
 
 }
 
@@ -4390,7 +4394,7 @@ ul.icon li::before {
 .open-filter > a:after {
     color: #999;
     content: "\f35f";
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     font-size: 20px;
     position: absolute;
     right: 13px;
@@ -4520,7 +4524,7 @@ ul.icon li::before {
 
 .filter-input.nice-select::after {
     content: '\f35f';
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     display: block;
     margin-top: 5px;
     pointer-events: none;
@@ -4606,7 +4610,7 @@ ul.icon li::before {
     border-radius: 4px;
     box-sizing: border-box;
     transition: all 0.25s;
-    font-family: "Ionicons";
+    font-family: 'tomorrowfont';
     font-size: 25px;
     color: #fff;
     text-align: center;
@@ -7751,7 +7755,7 @@ span.infobox_rate {
     .nav-folderized .nav h2:after {
         content: "\f3d0";
         float: right;
-        font-family: "Ionicons";
+        font-family: 'tomorrowfont';
         font-size: 17px;
         line-height: 1;
         margin-left: 10px;
@@ -7762,7 +7766,7 @@ span.infobox_rate {
     .nav-folderized .nav.open h2:after {
         content: "\f3d8";
         float: right;
-        font-family: "Ionicons";
+        font-family: 'tomorrowfont';
         font-size: 18px;
     }
 

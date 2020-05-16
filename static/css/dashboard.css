@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'tomorrowfont';
+    src: url('../fonts/Tomorrow.ttf')
+}
+
+body {
+    font-family: 'tomorrowfont';
+    overflow-x: hidden;
+}
+
 /*========================================
             General
 =========================================*/

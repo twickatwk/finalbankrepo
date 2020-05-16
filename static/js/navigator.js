@@ -10,10 +10,10 @@ class Navigator extends React.Component {
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a id="linktxt" class="nav-link" href="#">My Vault <span class="sr-only">(current)</span></a>
+                            <a id="linktxt" class="nav-link" href="/grants">My Vault <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a id="linktxt" class="nav-link" href="#">RazFunds</a>
+                            <a id="linktxt" class="nav-link" href="/investors">RazFunds</a>
                         </li>
                     </ul>
                 </div>
