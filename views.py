@@ -150,4 +150,5 @@ def crowdsourcing():
 
 @application.route('/investors')
 def investors_page():
+    
     return render_template('investors.html')

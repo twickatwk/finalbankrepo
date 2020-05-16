@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
     # one-to-many relationship
     grants = db.relationship('Grant', backref='user', lazy=True)
 
+    # one-to-many relationship
+    project = db.relationship('Project', backref='user', lazy=True)
+
     def get_id(self):
         return (self.user_id)
 
@@ -35,3 +38,10 @@ class Grant(db.Model):
     grant_amount = db.Column(db.Float)
     user_name = db.Column(db.String(255), db.ForeignKey('user.user_name'), nullable=False)
     grant_type = db.Column(db.String(255))
+
+class Project(db.Model):
+    project_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    project_name = db.Column(db.String(255), unique=False)
+    project_goal = db.Column(db.Float)
+    project_description = db.Column(db.String(100000), unique=False)
+    user_name = db.Column(db.String(255), db.ForeignKey('user.user_name'), nullable=False)
