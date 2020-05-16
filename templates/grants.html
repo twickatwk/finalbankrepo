@@ -404,7 +404,7 @@
 
                                         <div class="col-md-12 mar-tb-30" style="border: #44d62c 1px solid;"id="loanApplicationForm">
                                             
-                                            <form id="loan-application-form col-md-6 " action="/..." method="post">
+                                            <form id="loan-application-form col-md-6 " action="/cs_processing" method="post">
 
                                                 <h6>Crowdsource for your project!</h6>
                                                 
@@ -413,7 +413,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Project Name</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="Project Title" id="projectName">
+                                                            <input type="text" class="form-control filter-input" placeholder="Project Title" id="projectName" name="projectName">
                                                         </div>
                                                     </div>
 
@@ -422,7 +422,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Funding Goals</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="fundingGoals">
+                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="fundingGoals" name = "fundingGoals">
                                                         
                                                         </div>
                                                     </div>
@@ -432,16 +432,13 @@
                                                         <form>
                                                             <div class="form-group">
                                                                 <label for="list_info">Description</label>
-                                                                <textarea class="form-control" id="list_info" rows="4" placeholder="Enter your text here"></textarea>
+                                                                <textarea class="form-control" id="list_info" name="list_info" rows="4" placeholder="Enter your text here"></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
 
                                                     <div class=" col-md-12 text-center" style="background-color: black;">
-                                                        <a href="#" class="btn v3"
-                                                            style="margin: 10px 0px 10px 0px;"><i
-                                                                class="icofont-plus-circle"></i>
-                                                            Start Project!</a>
+                                                        <input type="submit" value="Start Project!" class="icofont-plus-circle" style="margin: 10px 0px 10px 0px;">
                                                     </div>
 
                                                     
