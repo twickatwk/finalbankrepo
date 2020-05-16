@@ -9,7 +9,6 @@ function dataCallback(data) {
 
 class Page extends React.Component {
     render() {
-        console.log('Hello World')
 
         return(
             <div>
@@ -95,16 +94,18 @@ class ProjectRow extends React.Component {
         var data = []
 
         for (var key in values) {
+            data.push(key)
             data.push(values[key][0])
             data.push(values[key][1])
+            data.push(values[key][2])
             rows.push(<ProjectBox data={data}/>)
             data = []
         }
 
         return(
             <div class="container">
-                <div class="row">
-                    <div class="col-6 d-flex justify-content-center">
+                <div class="row align-items-center">
+                    <div class="col-12 d-flex justify-content-center">
                        <ul>
                            {rows}
                         </ul>
@@ -119,12 +120,34 @@ class ProjectBox extends React.Component {
 
     render(){
         return(
-            <div class="card text-white bg-success mb-3 bg-black shadow-lg">
-                <div class="card-header">SpaceX</div>
+            <div class="card text-white mb-3 bg-light shadow-lg">
+                <div class="card-header">{this.props.data[0]}</div>
                 <div class="card-body">
-                    <h5 class="card-title">{this.props.data[0]}</h5>
-                    <p class="card-text">{this.props.data[1]}</p>
-                    <button type="button" class="btn btn-dark">Fund this Project</button>
+                    <h5 class="card-title">{this.props.data[1]}</h5>
+                    <p class="card-text">{this.props.data[2]}</p>
+                    <div class="row">
+                        <div class="col-2">
+                            <p><span id="bartxt">Funding Goal:</span></p>
+                        </div>
+                        <div class="col-10">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-5">
+                                    <input class="form-control" type="text" placeholder="Enter SGD Amount"/>
+                                </div>
+                                <div class="col-7">
+                                    <button type="submit" class="btn btn-dark">Fund this Project</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         )

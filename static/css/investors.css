@@ -31,8 +31,18 @@ body {
 }
 
 .card {
-    max-width: 30rem;
+    min-width: 50rem;
     margin: 5rem;
+}
+
+.card-body {
+    color: white;
+    background-color: #66B933;
+}
+
+.card-header {
+    color: #66B933;
+    background-color: #000000;
 }
 
 .page-wrapper {
@@ -41,4 +51,17 @@ body {
 
 .navbar {
     margin-bottom: 0rem;
+}
+
+.progress {
+    margin-top: 0.3rem;
+}
+
+#bartxt {
+    color:black
+}
+
+.progress-bar {
+    width: 25%;
+    background: black;
 }

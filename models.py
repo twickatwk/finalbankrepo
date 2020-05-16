@@ -1,7 +1,6 @@
 from application import db
 from flask_login import UserMixin
 
-
 class User(db.Model, UserMixin):
     user_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     user_name = db.Column(db.String(255), nullable=False, unique=True)
@@ -51,7 +50,6 @@ class Grant(db.Model):
     
     #user foreign key
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-
 
 class Project(db.Model):
     project_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
