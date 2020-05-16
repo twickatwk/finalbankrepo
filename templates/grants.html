@@ -213,29 +213,21 @@
                                 <div class="tab-pane fade" id="loans">
                                     <div class="tab-content mar-tb-30" id="lionTabContent-1">
 
-
+                                        
                                         <div class="col-md-12 mar-tb-30" id="yourloanbox" style="border: #44d62c 1px solid;">
                                             <h6>Your Loan(s)</h6>
                                             <div class="col-md-12 mar-tb-20 text-center hero-catagory-wrapper v1" >
+                                                {% for value in all_loans %}
                                                 <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
                                                     
-                                                    <p style="color: #44d62c;"class="name">Loan ID : #123456</p>
-                                                    <p class="d-name">Loan Details</p>
+                                                    <p style="color: #44d62c;"class="name">Loan ID : {{value.loanacc_key}} Loan Amount:  {{value.loan_amount}} </p>
+                                                    <!--p class="d-name">Loan Details</p-->
                                                 </a>
-                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
-                                                    
-                                                    <p style="color: #44d62c;"class="name">Loan ID : #123456</p>
-                                                    <p class="d-name">Loan Details</p>
-                                                </a>
-                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
-                                                    
-                                                    <p style="color: #44d62c;"class="name">Loan ID : #123456</p>
-                                                    <p class="d-name">Loan Details</p>
-                                                </a>
-                                                
+                                                {% endfor %}
                                                
                                             </div>
                                         </div>
+                                        
 
                                         <div class="col-md-12 mar-tb-30" style="border: #44d62c 1px solid;"id="loanApplicationForm">
                                             

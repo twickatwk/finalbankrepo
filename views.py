@@ -133,9 +133,13 @@ def grant_page():
     currUserFirstName = current_user.first_name
     currUserLastName = current_user.last_name
     currUserID = current_user.user_id
-    grant = Grant.query.filter_by(user_id=currUserID)
-    print(CurrentsAccount.query.filter_by(user_id = currUserID).first())
-    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName, grant = grant)
+    #grant = Grant.query.filter_by(user_id=currUserID)
+    
+    all_loans = LoanAccount.query.filter_by(user_id=currUserID).all()
+    #for i in all_loans:
+    #    print(i.interest_rate)
+    
+    return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName,  all_loans = all_loans)
 
 @application.route('/loans')
 #@login_required
