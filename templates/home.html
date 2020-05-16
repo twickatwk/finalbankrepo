@@ -1,10 +1,337 @@
-<html>
-    <h1>You're logged in!</h1>
-    <p>Welcome {{ current_user.first_name }}</p>
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
 
-    <form action="{{url_for('logout')}}" method="post">
-            <button type="submit" class="btn v3"><i
-                class="ion-log-in"></i> Log out
-            </button>
-    </form>
+<head>
+    <!-- Metas -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="LionCoders" />
+    <!-- Links -->
+    <link rel="icon" type="image/png" href="#" />
+    <!-- google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="/static/css/plugin.css" rel="stylesheet" />
+    <!-- style CSS -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+    
+
+    <script>
+        var TxtRotate = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function () {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+        };
+    </script>
+
+
+    <!-- Document Title -->
+    <title>ZDAC</title>
+</head>
+
+<body>
+    <!-- Preloader starts-->
+    <!-- <div class="preloader js-preloader">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div> -->
+    <!--Preloader ends -->
+    <!--Page Wrapper starts-->
+    <div class="page-wrapper fixed-footer">
+        <!--header starts-->
+        <header class="header transparent scroll-hide">
+            <!--Main Menu starts-->
+            <div class="site-navbar-wrap v1" style="background-color: black">
+                <div class="container">
+                    <div class="site-navbar">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 col-6">
+                                <!-- <a class="navbar-brand" href="#">ZDAC<img src="/static/images/logoX.png" alt="logo"
+                                        class="img-fluid">ZDAC</a> -->
+                                <a class="navbar-brand" style="color:#44d62c">ZDAC | Welcome {{ current_user.first_name }}!</a>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <h5 style="color:white;">{{ message }}</h5>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                                <div class="add-list float-right">
+
+                                    <!-- Logout -->
+                                    <form action="{{url_for('logout')}}" method="post">
+                                        <button type='submit' class="btn v8" style="width: 12em;background:#44d62c">
+                                            LOGOUT
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Main Menu ends-->
+        </header>
+        <!--Header ends-->
+        <!--Hero section starts-->
+        <div class="hero v1 section-padding bg-zoom" style="background: url(/static/images/bg/background.jpg)">
+            <div class="overlay op-3"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="hero__title places-tab">
+                            Source for
+                            <span class="txt-rotate" data-period="1000"
+                                data-rotate='[ "Grants", "Loans", "Crowdfunds"]'></span>
+                            </br></h1>
+                        <h1 class="hero__title places-tab" style="color:#44d62c">    
+                            all in a glance.
+                        </h1>
+
+
+                        <p class="hero__description">
+                            ZDAC provides our client with a one-stop platform to source for Grants, Loans and Crowdfunding</br> essentially $$$ to expand their business
+                        </p>
+                    </div>
+                    <
+                </div>
+            </div>
+        </div>
+        <!--Hero section ends-->
+        <!--Listing Details Info starts-->
+        <div class="list-details-section section-padding" style="background-color:#44d62c">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h2 class="section-title v1 mar-top-20" style="color: black;"> We can help with</h2>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="tab-content mar-bot-20" id="lionTabContent">
+                            <div class="tab-pane fade active show" id="monthly">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="pricing-table" style="background-color: black;height: 550px;">
+                                            
+                                            <h3 style="margin-top:20px;height:250px;color: white;">Grants</h3>
+                                            <div class="price-value" style="background-color: black;">
+                                                
+                                                    <div class="price-num-item" style="margin-top: 10px;">
+                                                        <i style="color: #44d62c;" class="icofont-money-bag"></i>
+                                                    </div>
+                                                
+                                            </div>
+                                            
+                                            <p style="color: white;">Suitable for:</p>
+                                            <ul class="pricing-content ">
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>SMEs</li>
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>Start-Ups</li>
+                                            </ul>
+                                            <a href="/grants" class="btn v3">View more</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="pricing-table" style="background-color: black;height: 550px;">
+                                            
+                                            <h3 style="margin-top:20px;height:250px;color: white;">Loans</h3>
+                                            <div class="price-value" style="background-color: black;">
+                                                
+                                                <div class="price-num-item" style="margin-top: 10px;">
+                                                        <i style="color: #44d62c;" class="icofont-bank"></i>
+                                                    </div>
+                                                
+                                            </div>
+                                            
+                                            <p style="color: white;">Suitable for:</p>
+                                            <ul class="pricing-content ">
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>SMEs</li>
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>Start-Ups</li>
+                                            </ul>
+                                            <a href="/loans" class="btn v3">View more</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="pricing-table" style="background-color: black;height: 550px;">
+                                            
+                                            <h3 style="margin-top:20px;height:250px;color: white;">CrowdFunding</h3>
+                                            <div class="price-value" style="background-color: black;">
+                                                
+                                                <div class="price-num-item" style="margin-top: 10px;">
+                                                        <i style="color: #44d62c;" class="icofont-people"></i>
+                                                    </div>
+                                                
+                                            </div>
+                                            
+                                            <p style="color: white;">Suitable for:</p>
+                                            <ul class="pricing-content ">
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>SMEs</li>
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>Start-Ups</li>
+                                                <li style="color: #44d62c;"><i class="icofont-tick-boxed"></i>Individuals</li>
+                                            </ul>
+                                            <a href="/crowdsourcing" class="btn v3">View more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Listing Details Info ends-->
+        
+
+
+        <!-- Scroll to top starts-->
+        <span class="scrolltotop"><i class="ion-arrow-up-c" style="color: black;"></i></span>
+        <!-- Scroll to top ends-->
+    </div>
+    <!--Page Wrapper ends-->
+    <!--Footer Starts-->
+    <div class="footer-wrapper no-pad-tb ">
+        <div class="footer-top-area section-padding" style="background-color: black;">
+            
+            <div class="container">
+                <div class="row nav-folderized" style="height: 150px;">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-logo">
+                            <a class="navbar-brand" style="color:#44d62c">ZDAC</a><div class="company-desc">
+                                <p>
+                                    Razer Fintech Digital</br> Hackathon
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Links</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Login</a></li>
+                                <li><a class="link-hov style1" href="#">My Account</a></li>
+                                <li><a class="link-hov style1" href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Products</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style1" href="#">Grant</a></li>
+                                <li><a class="link-hov style1" href="#">Loans</a></li>
+                                <li><a class="link-hov style1" href="#">Crowdfund</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title" style="color: #44d62c;">Powered By:</h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Razer</a></li>
+                                <li><a class="link-hov style2" href="#">AWS</a></li>
+                                <li><a class="link-hov style2" href="#">VISA</a></li>
+                                <li><a class="link-hov style2" href="#">Mambu</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-12">
+                        <div class="footer-content nav">
+                            <h2 class="title"></br></h2>
+                            <ul class="list">
+                                <li><a class="link-hov style2" href="#">Perx</a></li>
+                                <li><a class="link-hov style2" href="#">FWD</a></li>
+                                <li><a class="link-hov style2" href="#">PWC</a></li>
+                                <li><a class="link-hov style2" href="#">SMU</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area" style="background-color: #44d62c;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <p>&copy; 2019 ZDAC. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer ends-->
+    
+    <!--Scripts starts-->
+    <!--plugin js-->
+    <script src="/static/js/plugin.js"></script>
+    <!--Main js-->
+    <script src="/static/js/main.js"></script>
+    <!--Scripts ends-->
+
+    <script src="/static/js/index_validation.js"></script>
+
+
+
+
+
+</body>
+
 </html>
