@@ -1,0 +1,10 @@
+<html>
+    <h1>You're logged in!</h1>
+    <p>Welcome {{ current_user.first_name }}</p>
+
+    <form action="{{url_for('logout')}}" method="post">
+            <button type="submit" class="btn v3"><i
+                class="ion-log-in"></i> Log out
+            </button>
+    </form>
+</html>
