@@ -28,7 +28,7 @@
 <body>
 
     <!--Page Wrapper starts-->
-    <div class="page-wrapper fixed-footer">
+    <div class="page-wrapper fixed-footer mar-bb-30">
         <!--header starts-->
         <header class="header transparent scroll-hide">
             <!--Main Menu starts-->
@@ -54,10 +54,10 @@
 
 
         <<!--User Profile starts-->
-            <div class="user-profile section-padding mar-top-30 " ;>
+            <div class="col-lg-12 col-md-12 list-details-section section-padding user-profile section-padding mar-top-30 " ;>
                 <div style="height: 40px;background-color: black;"></div>
                 <!--Dashboard content starts-->
-                <div class="dash-content" style="background-color: black;">
+                <div class="dash-content " style="background-color: black;">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 2">
@@ -72,7 +72,7 @@
                                             <!-- <div class="user-avatar">
                                         <img src="/static/images/user.jpg" alt="">
                                     </div> -->
-                                            <div class="col-md-10 offset-md-0">
+                                            <div class="col-md-12 offset-md-0">
                                                 <div class="my-profile">
                                                     <ul class="db-profile-info">
                                                         <li>
@@ -91,7 +91,7 @@
                                                             <h6>Phone :</h6>
                                                             <span> +44 20 7336 8898</span>
                                                         </li>
-                                                        <li>
+                                                        <!-- <li>
                                                             <h6>Password :</h6>
                                                             <span>123456</span>
                                                         </li>
@@ -101,7 +101,7 @@
                                                             <a href="#" class="btn v3"
                                                                 style="position:relative;font-size: smaller;margin-left: 10px;">Upload
                                                                 NRIC</a>
-                                                        </li>
+                                                        </li> -->
                                                         <li>
                                                             <h6>Address :</h6>
                                                             <span> 864 W. Walnut Ave. Avon, IN 46123 St James Pl,
@@ -256,47 +256,96 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Listing Title</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="Hotel Ocean paradise">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Category</label>
-                                                            <div class="nice-select filter-input" tabindex="0"><span class="current">Select Categories</span>
-                                                                <ul class="list">
-                                                                    <li class="option selected focus">Hotels</li>
-                                                                    <li class="option">Restaurants</li>
-                                                                    <li class="option">Shopping</li>
-                                                                    <li class="option">Eat &amp; Drink</li>
-                                                                    <li class="option">Events</li>
-                                                                    <li class="option">Fitness</li>
+                                                            <label>Loan Name</label>
+                                                            <div class="nice-select filter-input" tabindex="0"><span class="current">Select Loan Type</span>
+                                                                <ul class="list" id ="loanName">
+                                                                    <li class="option selected focus">Student Loan</li>
+                                                                    <li class="option">SME Loan</li>
+                                                                    <li class="option">Startup Loan</li>
+                                                                    
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Keywords</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="Keywords should be separated by commas">
+                                                            <label>Loan Amount</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="loanAmount">
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Address</label>
-                                                            <input type="text" class="form-control filter-input" placeholder="Address of your hotel">
+                                                            <label>Interest Rate</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="0.10%" id="interestRate">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    
+                                                    <!-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Arrears Tolerance Period</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="1" id="arrearsTolerancePeriod">
+                                                        </div>
+                                                    </div> -->
+
+                                                    <!-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Grace Period</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="1" id="gracePeriod">
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Repayment Installment</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="10" id="repaymentInstallments">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Repayment Period Count</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="1" id="repaymentPeriodCount">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Periodic Payment</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="1" id="periodicPayment">
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Repayment Period Count</label>
+                                                            <div class="nice-select filter-input" tabindex="0"><span class="current">Select Loan Type</span>
+                                                                <ul class="list" id ="loanName">
+                                                                    <li class="option selected focus">WEEKS</li>
+                                                                    <li class="option">MONTHS</li>
+                                                                    <li class="option">YEARS</li>
+                                                                    
+                                                                </ul>
+                                                            </div></div>
+                                                    </div>
+                                                    <div class=" col-md-12 text-center" style="background-color: black;">
+                                                        <a href="#" class="btn v3"
+                                                            style="margin: 10px 0px 10px 0px;"><i
+                                                                class="icofont-plus-circle"></i>
+                                                            Apply</a>
+                                                    </div>
+
+                                                    <!-- <div class="col-md-12">
                                                         <form>
                                                             <div class="form-group">
                                                                 <label for="list_info">Description</label>
                                                                 <textarea class="form-control" id="list_info" rows="4" placeholder="Enter your text here"></textarea>
                                                             </div>
                                                         </form>
-                                                    </div>
+                                                    </div> -->
                 
-                                                    <div class="col-md-12">
+                                                    <!-- <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>Features</label>
                                                             <div class="filter-checkbox">
@@ -324,7 +373,7 @@
 
 
                                                         
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             
                                                 
@@ -337,182 +386,107 @@
                                 </div>
                                 <div class="tab-pane fade" id="crowdsource">
                                     <div class="tab-content mar-tb-30" id="lionTabContent-1">
-                                        <div class="tab-pane fade active show" id="my-followers">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewer-4.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Shon Adams</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewer-3.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Lee Priest</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewer-1.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Frank Jane</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewr-2.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Christine Evans</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+
+                                        <div class="col-md-12 mar-tb-30" id="yourloanbox" style="border: #44d62c 1px solid;">
+                                            <h6>Your Project(s)</h6>
+                                            <div class="col-md-12 mar-tb-20 text-center hero-catagory-wrapper v1" >
+                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
+                                                    
+                                                    <p style="color: #44d62c;"class="name">Project ID : #123456</p>
+                                                    <p class="d-name">Project Details</p>
+                                                </a>
+                                                <a href="#" class="hero-category-content v1" style="border: #44d62c 1px solid;">
+                                                    
+                                                    <p style="color: #44d62c;"class="name">Project ID : #223456</p>
+                                                    <p class="d-name">Project Details</p>
+                                                </a>
+                                                
+                                               
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="my-following">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewer-1.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Frank Jane</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
+
+                                        <div class="col-md-12 mar-tb-30" style="border: #44d62c 1px solid;"id="loanApplicationForm">
+                                            
+                                            <form id="loan-application-form col-md-6 " action="/..." method="post">
+
+                                                <h6>Crowdsource for your project!</h6>
+                                                
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Project Name</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="Project Title" id="projectName">
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="sidebar-widget follow">
-                                                        <div class="follow-img">
-                                                            <img src="images/clients/reviewr-2.png" class="img-fluid"
-                                                                alt="#">
-                                                            <h6>Christine Evans</h6>
-                                                            <span>New York</span>
-                                                        </div>
-                                                        <ul class="social-counts">
-                                                            <li>
-                                                                <h6>26</h6>
-                                                                <span>Listings</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>326</h6>
-                                                                <span>Followers</span>
-                                                            </li>
-                                                            <li>
-                                                                <h6>12</h6>
-                                                                <span>Following</span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="text-center mar-bot-25">
-                                                            <a href="#" class="btn v3"><i class="icofont-eye-alt"></i>
-                                                                Follow</a>
+
+                                                    
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Funding Goals</label>
+                                                            <input type="text" class="form-control filter-input" placeholder="$SGD" id="fundingGoals">
+                                                        
                                                         </div>
                                                     </div>
+
+
+                                                    <div class="col-md-12">
+                                                        <form>
+                                                            <div class="form-group">
+                                                                <label for="list_info">Description</label>
+                                                                <textarea class="form-control" id="list_info" rows="4" placeholder="Enter your text here"></textarea>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class=" col-md-12 text-center" style="background-color: black;">
+                                                        <a href="#" class="btn v3"
+                                                            style="margin: 10px 0px 10px 0px;"><i
+                                                                class="icofont-plus-circle"></i>
+                                                            Apply</a>
+                                                    </div>
+
+                                                    
+                
+                                                    <!-- <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Features</label>
+                                                            <div class="filter-checkbox">
+                                                                <input id="check-a" type="checkbox" name="check">
+                                                                <label for="check-a">Elevator in building</label>
+                                                                <input id="check-b" type="checkbox" name="check">
+                                                                <label for="check-b">Air Conditioned</label>
+                                                                <input id="check-c" type="checkbox" name="check">
+                                                                <label for="check-c">Free Wi Fi</label>
+                                                                <input id="check-d" type="checkbox" name="check">
+                                                                <label for="check-d">Free Parking on premises</label>
+                                                                <input id="check-f" type="checkbox" name="check">
+                                                                <label for="check-f">Instant Book</label>
+                                                                <input id="check-e" type="checkbox" name="check">
+                                                                <label for="check-e">Pet Friendly </label>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                            
+                                                            <div class="res-box text-center mar-top-30">
+                                                                <button type="submit" class="btn v3"><i
+                                                                        class="ion-android-checkmark-circle"></i>Apply Loan
+                                                                </button>
+                                                            </div>
+
+
+                                                        
+                                                    </div> -->
                                                 </div>
-                                            </div>
+                                            
+                                                
+                                            </form>
+                                            
                                         </div>
+
+                                        
                                     </div>
                                 </div>
 
@@ -531,7 +505,7 @@
         <div class="footer-top-area section-padding" style="background-color: black;">
 
             <div class="container">
-                <div class="row nav-folderized">
+                <div class="row nav-folderized" style="height: 150px;">
                     <div class="col-lg-3 col-md-12">
                         <div class="footer-logo">
                             <a class="navbar-brand" style="color:#44d62c">ZDAC</a>
