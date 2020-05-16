@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Email, Length, Optional, Validatio
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
-from models import User, Grant, Project, CurrentsAccount, LoanAccount
+from models import User, Grant, Project, CurrentsAccount, LoanAccount, Investment
 from application import db
 import requests
 import random
@@ -127,6 +127,18 @@ def logout():
 
     return redirect(url_for('index'))
 
+# API endpoint for react to obtain all Projects by the Logged in User
+@application.route("/getProjectsByUser")
+def getProjectsByUser():
+    # SQL Alchemy Code to retrieve all data from the db
+    results = Project.query.filter_by(user_id=current_user.user_id)
+    data_set = {}
+    # Loop through the results array and add it into the dictionary of Project objects
+    for record in results:
+        data_set[record.project_id] = [record.project_name, record.project_description, str(record.project_goal)]
+
+    # Convert dataset into JSON object and return it to the fetch command
+    return jsonify(data_set)
 
 @application.route('/grants')
 def grant_page():
@@ -134,6 +146,7 @@ def grant_page():
     currUserLastName = current_user.last_name
     currUserID = current_user.user_id
     grant = Grant.query.filter_by(user_id=currUserID)
+    
     print(CurrentsAccount.query.filter_by(user_id = currUserID).first())
     return render_template('grants.html', fname = currUserFirstName, lname = currUserLastName, grant = grant)
 
@@ -265,7 +278,7 @@ def getProjects():
 def addFunds():
     amount = request.args.get('amount')
     project_id = request.args.get('pid')
-    new_investment = Investment(investment_amount=amount, user_id="8a8e86697217553701721d9e6e332ea1", project_id=project_id)
+    new_investment = Investment(investment_amount=amount, user_id=current_user.user_id, project_id=project_id)
 
     db.session.add(new_investment)
 

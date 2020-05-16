@@ -68,6 +68,7 @@ li {
 p {
     color: white;
     margin-top: 5px;
+    color: #44d62c;
 }
 a {
     color: transparent;
@@ -2394,7 +2395,7 @@ ul.list-inline li {
     justify-content: center;
     border: 1px solid rgba(30, 195, 139, 0.4);
     border-radius: 4px;
-
+    border: #44d62c 1px solid;
 }
 
 .hero-category-content i {
