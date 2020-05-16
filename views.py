@@ -179,7 +179,7 @@ def loanprocessing_page():
             except Exception as e:
                 db.session.rollback()
                 flash('Something went wrong. Please try again.')
-                return redirect(url_for('grants'))
+                return redirect(url_for('grant_page'))
 
         #Create new loan
         accountHolderType = "CLIENT"
@@ -226,12 +226,12 @@ def loanprocessing_page():
         except Exception as e:
             db.session.rollback()
             flash('Something went wrong. Please try again.')
-            return redirect(url_for('grants'))
+            return redirect(url_for('grant_page'))
 
         flash('You have successfully applied for a loan.')
-        return redirect(url_for('grants'))
+        return redirect(url_for('grant_page'))
     else:
-        return redirect(url_for('grants'))
+        return redirect(url_for('grant_page'))
 
 
 # @application.errorhandler(404)
