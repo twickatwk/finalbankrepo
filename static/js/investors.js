@@ -8,14 +8,12 @@ function dataCallback(data) {
 }
 
 function sayHello(amount, projectid) {
-    alert(amount)
-    alert(projectid)
     var url = '/addFunds?amount=' + amount + '&pid=' + projectid
-    alert(url)
     fetch(url).then(function() {
     // Handle response you get from the server
         console.log("Fund is successfully added")
     });
+    alert("Fund is successfully added to the project!")
 }
 
 class Page extends React.Component {
