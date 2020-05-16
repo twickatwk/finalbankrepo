@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Email, Length, Optional
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import json
-from models import User, Grant
+from models import User, Grant, Project
 from application import db
 import requests
 
@@ -184,18 +184,25 @@ def loanprocessing_page():
     else:
         return redirect(url_for('loan_page'))
 
+# This code might not be needed
 @application.route('/crowdsourcing')
 def crowdsourcing():
     return render_template('crowdsourcing.html')
 
+# End Point to render crowdsourcing web page back to the user
 @application.route('/investors')
 def investors_page():
-    
     return render_template('investors.html')
 
+# API endpoint for react to obtain all Projects
 @application.route("/getProjects")
 def getProjects():
-    # this is the piece to be changed
-    data_set = {"SpaceX": ["Falcon Rocket", "Falcon 9 is a partially reusable two-stage-to-orbit medium lift launch vehicle designed and manufactured by SpaceX in the United States. It is powered by Merlin engines, also developed by SpaceX, burning cryogenic liquid oxygen and rocket-grade kerosene as propellants."], "DeepMind": ["AlphaGo", "AlphaGo is a computer program that plays the board game Go."]}
-    # Convert dataset into JSON object and return it
+    # SQL Alchemy Code to retrieve all data from the db
+    results = Project.query.all()
+    data_set = {}
+    # Loop through the results array and add it into the dictionary of Project objects
+    for record in results:
+        data_set[record.project_id] = [record.project_name, record.project_description, str(record.project_goal)]
+
+    # Convert dataset into JSON object and return it to the fetch command
     return jsonify(data_set)

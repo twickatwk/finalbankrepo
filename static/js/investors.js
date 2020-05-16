@@ -94,8 +94,10 @@ class ProjectRow extends React.Component {
         var data = []
 
         for (var key in values) {
+            data.push(key)
             data.push(values[key][0])
             data.push(values[key][1])
+            data.push(values[key][2])
             rows.push(<ProjectBox data={data}/>)
             data = []
         }
@@ -119,10 +121,10 @@ class ProjectBox extends React.Component {
     render(){
         return(
             <div class="card text-white mb-3 bg-light shadow-lg">
-                <div class="card-header">SpaceX</div>
+                <div class="card-header">{this.props.data[0]}</div>
                 <div class="card-body">
-                    <h5 class="card-title">{this.props.data[0]}</h5>
-                    <p class="card-text">{this.props.data[1]}</p>
+                    <h5 class="card-title">{this.props.data[1]}</h5>
+                    <p class="card-text">{this.props.data[2]}</p>
                     <div class="row">
                         <div class="col-2">
                             <p><span id="bartxt">Funding Goal:</span></p>
@@ -144,7 +146,6 @@ class ProjectBox extends React.Component {
                                     <button type="submit" class="btn btn-dark">Fund this Project</button>
                                 </div>
                             </div>
-                            
                         </div>
                     </form>
                 </div>
