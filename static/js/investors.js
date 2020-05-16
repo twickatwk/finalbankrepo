@@ -1,7 +1,16 @@
+var allProjects = null
 
+function dataCallback(data) {
+    // This function sets the value of allProjects variable
+    allProjects = data
+    // This function returns the value into the console, for verification
+    console.log(allProjects["DeepMind"])
+}
 
 class Page extends React.Component {
     render() {
+        console.log('Hello World')
+
         return(
             <div>
                 <Navigator />
@@ -31,7 +40,7 @@ class Navigator extends React.Component {
                         </li>
                     </ul>
                 </div>
-                </nav>
+            </nav>
         )
     }
 }
@@ -50,15 +59,56 @@ class MainTitle extends React.Component {
 }
 
 class ProjectRow extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            values: [],
+        };
+    }
+    // componentDidMount() happens after render()
+    componentDidMount() {
+        // Use fetch to make an API call to the flask endpoint to retrieve for display
+        fetch('./getProjects')
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            dataCallback(data)
+            var names = []
+            for (var key in data) {
+                names.push(data[key][0]);
+            }
+            this.setState({ values: data })
+            // NOTE: React component generation doesnt work inside the fetch method
+            
+        })
+        .catch(err => {
+            // Do something for an error here
+            alert("Error occurred")
+        })
+    }
     render() {
+
+        const { values } = this.state;
+
+        var rows = []
+        var data = []
+
+        for (var key in values) {
+            data.push(values[key][0])
+            data.push(values[key][1])
+            rows.push(<ProjectBox data={data}/>)
+            data = []
+        }
+
         return(
             <div class="container">
                 <div class="row">
                     <div class="col-6 d-flex justify-content-center">
-                        <ProjectBox />
-                    </div>
-                    <div class="col-6 d-flex justify-content-center">
-                        <ProjectBox />
+                       <ul>
+                           {rows}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -67,13 +117,14 @@ class ProjectRow extends React.Component {
 }
 
 class ProjectBox extends React.Component {
+
     render(){
         return(
             <div class="card text-white bg-success mb-3 bg-black shadow-lg">
                 <div class="card-header">SpaceX</div>
                 <div class="card-body">
-                    <h5 class="card-title">Falcon Rocket</h5>
-                    <p class="card-text">Falcon 9 is a partially reusable two-stage-to-orbit medium lift launch vehicle designed and manufactured by SpaceX in the United States. It is powered by Merlin engines, also developed by SpaceX, burning cryogenic liquid oxygen and rocket-grade kerosene as propellants.</p>
+                    <h5 class="card-title">{this.props.data[0]}</h5>
+                    <p class="card-text">{this.props.data[1]}</p>
                     <button type="button" class="btn btn-dark">Fund this Project</button>
                 </div>
             </div>
