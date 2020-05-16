@@ -51,33 +51,28 @@ def register():
             flash('Your passwords do not match. Please try again.')
             return redirect(url_for('index'))
 
-        firstName = registration_form.first_name.data
-        lastName = registration_form.last_name.data
-        preferredLanguage = "ENGLISH"
-        notes = ""
-        assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
-        basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
-        identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
-        issuingAuthority = "Immigration Authority of Singapore"
-        documentType = "NRIC"
-        validUntil = "2200-01-01"
-        documentId = registration_form.nric.data
-        identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
-        createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
-        headers = {'content-type': 'application/json'}
-        response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
-        response_data = response.json()
-        print(response_data)
-        user_encoded_id = response_data["client"]["encodedKey"]
-        print(user_encoded_id)
-
-        # ========== IMPORTANT: Wrong way to add id! Should use Mambu id ======================
-        # ========== This is just a workaround to allow site to keep adding new users =========
-        #id_to_add = 0
-        #try:
-        #    id_to_add = User.query.order_by(User.user_id.desc()).first().user_id + 1
-        #except AttributeError:
-        #    id_to_add = 1
+        # ==========  Mambu  ======================
+        try:
+            firstName = registration_form.first_name.data
+            lastName = registration_form.last_name.data
+            preferredLanguage = "ENGLISH"
+            notes = ""
+            assignedBranchKey = "8a8e878e71c7a4d70171ca644def1259"
+            basicInfo = {"firstName": firstName, "lastName": lastName, "preferredLanguage": preferredLanguage, "notes": notes, "assignedBranchKey": assignedBranchKey}
+            identificationDocumentTemplateKey = "8a8e867271bd280c0171bf7e4ec71b01"
+            issuingAuthority = "Immigration Authority of Singapore"
+            documentType = "NRIC"
+            validUntil = "2200-01-01"
+            documentId = registration_form.nric.data
+            identity = [{"identificationDocumentTemplateKey":identificationDocumentTemplateKey, "issuingAuthority":issuingAuthority, "documentType":documentType, "validUntil":validUntil, "documentId":documentId}]
+            createClientJson = json.dumps({"client":basicInfo, "idDocuments":identity})
+            headers = {'content-type': 'application/json'}
+            response = requests.post("https://razerhackathon.sandbox.mambu.com/api/clients", data=createClientJson, headers=headers, auth=('Team66', 'passEE8295411'))
+            response_data = response.json()
+            user_encoded_id = response_data["client"]["encodedKey"]
+        except Exception as e:
+            flash('Something went wrong. Please try again.')
+            return redirect(url_for('index'))
         # =====================================================================================
 
         new_user = User(user_name=registration_form.user_name.data,
